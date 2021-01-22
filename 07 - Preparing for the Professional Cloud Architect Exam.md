@@ -786,26 +786,88 @@ Third, is the state information isolated and separated from the front and back-e
 
 ### Designing Network, Storage, and Compute Resources
 
-There's usually more than one way to accomplish the same function in a system using different cloud technologies. However, the technologies make a difference in the overall system and its qualities. It helps to narrow down your options first based on what could work, and then decide which service is best in a circumstance. Identifying bottlenecks is especially useful for questions involving building out from existing solutions. For example, the current system can support X number of users, and the goal is to support Y number of users. What's the bottleneck in the current design? Is it bandwidths, gigabytes, queries per second? Where will the application hit its limits? This is often the factor that determines which solution is best in the circumstance. You need to be able to read data flow diagrams and to clearly think about the progression of data through a system. Don't assume that data-flow symmetrically, or that the capacities are symmetrical. Acid versus base is essential data knowledge that you'll want to be very familiar with, so that you can easily determine whether a particular data solution is compatible with requirements identified in the case. For example, for a financial transaction, a service that provides only eventual consistently might be incompatible. Did you know that in some cases and eventually, consistent solution can be made strongly consistent for a specific limited use case? In Cloud Datastore, there are only two APIs that provide a strongly consistent view for reading entity values and indexes. First, the lookup by key method and second, the ancestor query. Database services provide a model of consistency. Consistency makes certain guarantees with respect to data transactions. Whatever guarantees are not made by the data service becomes a responsibility of the application code. You should know the definition and significance of atomicity, consistency, isolation, and durability.
+There's usually more than one way to accomplish the same function in a system using different cloud technologies. However, the technologies make a difference in the overall system and its qualities.  
+It helps to narrow down your options first based on what could work, and then decide which service is best in a circumstance.  
+**Identifying bottlenecks is especially useful** for questions involving building out from existing solutions.  
+For example, the current system can support X number of users, and the goal is to support Y number of users.  
+What's the bottleneck in the current design? Is it bandwidths, gigabytes, queries per second? Where will the application hit its limits? This is often the factor that determines which solution is best in the circumstance.  
+
+You need to be able to **read data flow diagrams** and to clearly think about the progression of data through a system. Don't assume that data-flow symmetrically, or that the capacities are symmetrical. Acid versus base is essential data knowledge that you'll want to be very familiar with, so that you can easily determine whether a particular data solution is compatible with requirements identified in the case.  
+For example, for a financial transaction, **a service that provides only eventual consistently might be incompatible**. Did you know that **in some cases and eventually consistent solution can be made strongly consistent for a specific limited use case**?  
+In Cloud Datastore, there are only two APIs that provide a strongly consistent view for reading entity values and indexes.  
+First, **the lookup by key method** and second, **the ancestor query**. Database services provide a model of consistency. Consistency makes certain guarantees with respect to data transactions.  
+Whatever guarantees are not made by the data service becomes a responsibility of the application code. You should know the definition and significance of atomicity, consistency, isolation, and durability.
 
 ### Creating a Migration Plan
 
-In migration to cloud, you're always starting with data and processing in a data center. So, obviously that's the source of truth, and the cloud version is just a copy. But as you go through the migration plan, what happens to the truth? Eventually, you want the cloud version to be either equal and related to the data center version or more likely to replace it and allow the data center resources to be repurposed. Where is the source of truth? And when does that change? Often and ambiguous technical situation like which data storage service to select or which compute platform to choose is easily resolved if you think about it in practical terms and go beyond theory. Look for practical clues in the case question not just technical clues. We often talk about implementing complete solutions in the cloud. That certainly simplifies the design, but realistically there often elements that cannot be migrated from the data center. What resources will remain on-prem? What processes are necessary to integrate with existing systems in the cloud in GCP or in other clouds and in the data center? How do you prove to yourself that the solution will work and isn't just a good theory? Do you need to run a proof of concept? If you're moving something from a design for efficiency, for cost reduction, consider the consequences at all the layers. For example, if you reduce capacity of a solution because there are fewer users, would also reduce or remove the availability or disaster recovery features. After a solution is designed and implemented, it goes through a period of stabilization prior to the completion of delivery and hand-off. What do you need to include in the design to stabilize the solutions? What could change or what might need to be measured and adjusted? In some cases. There may be multiple stakeholders. The best solution will solve for all interests or for the common interest. For example, a CEO wants to improve data analytics, the CTO wants lower cost. At first the two interests might seem in conflict, however, moving to a different more efficient solution may solve both requirements. There's an old saying in IT, "Every 10 X in growth, something breaks." This is because the assumptions that went into the original design are no longer true. Quite often scaling up changes the nature of the problem and requires revisiting assumptions. So, in exam questions if you notice rapid growth or other indicators of large-scale change, start thinking about what might have broken or what might be ready to break. What processes will you need to define, to keep the solution operating? Monitoring, logging, metrics, to manage too. Often the design isn't done at hand-off. In practice, most cloud architects are required to stay on a project for a period after delivery to ensure that the solution continues to work and is maintainable.
+In migration to cloud, you're always starting with data and processing in a data center. So, obviously that's the source of truth, and the cloud version is just a copy. But as you go through the migration plan, what happens to the truth?  
+Eventually, you want the cloud version to be either equal and related to the data center version or more likely to replace it and allow the data center resources to be repurposed. Where is the source of truth? And when does that change? Often and ambiguous technical situation like which data storage service to select or which compute platform to choose is easily resolved if you think about it in practical terms and go beyond theory.  
+**Look for practical clues** in the case question not just technical clues. We often talk about implementing complete solutions in the cloud. That certainly simplifies the design, but realistically there often elements that cannot be migrated from the data center.  
+
+What resources will remain on-prem? What processes are necessary to integrate with existing systems in the cloud in GCP or in other clouds and in the data center? How do you prove to yourself that the solution will work and isn't just a good theory? Do you need to run a proof of concept?  
+If you're moving something from a design for efficiency, for cost reduction, **consider the consequences at all the layers**. For example, if you reduce capacity of a solution because there are fewer users, would also reduce or remove the availability or disaster recovery features.  
+After a solution is designed and implemented, it goes through a **period of stabilization** prior to the completion of delivery and hand-off.  
+What do you need to include in the design to stabilize the solutions?  
+What could change or what might need to be measured and adjusted? In some cases, there may be multiple stakeholders. **The best solution will solve for all interests** or for the common interest.  
+
+For example, a CEO wants to improve data analytics, the CTO wants lower cost. At first the two interests might seem in conflict, however, moving to a different more efficient solution may solve both requirements. There's an old saying in IT, "**Every 10 X in growth, something breaks.**"  
+This is because the assumptions that went into the original design are no longer true. Quite often scaling up changes the nature of the problem and requires revisiting assumptions.  
+So, in exam questions **if you notice rapid growth or other indicators of large-scale change**, start thinking about **what might have broken or what might be ready to break**.  
+What processes will you need to define, to keep the solution operating? Monitoring, logging, metrics, to manage too.  
+Often the design isn't done at hand-off. In practice, most cloud architects are required to stay on a project for a period after delivery to ensure that the solution continues to work and is maintainable.
 
 ### Practice Exam Questions 1
 
-Application parts developed by separate project teams will communicate over RfC 1918 addresses. Single project, same VPC. Shared VPC each project a service of the shared VPC project. Parts communicate using HTTPS. Communicate over Global Load balancers, one per project. The answer is B. Shared VPC, each project a service of the shared VPC project. Each team has their own project but communicates securely over a single RFC 1918 address space. The specific configuration is called shared VPC. VPC network peering, and it's described in the documentation on VPC peering. Which solutions should dress for wins real-time trend analysis using the Cloud? Cloud Dataflow, BigQuery, a Hadoop cluster and Compute Engine, or Cloud Dataproc. The answer is D. Cloud Dataproc. D, a managed service that can run Hadoop application. Real-time trend analysis, refer to the case study to learn this is Hadoop and Spark.
+Application parts developed by separate project teams will communicate over RfC 1918 addresses. 
+Single project, same VPC.  
+Shared VPC each project a service of the shared VPC project.  
+Parts communicate using HTTPS.  
+Communicate over Global Load balancers, one per project.  
+
+The answer is B. Shared VPC, each project a service of the shared VPC project. Each team has their own project but communicates securely over a single RFC 1918 address space. The specific configuration is called shared VPC. VPC network peering, and it's described in the documentation on VPC peering.  
+
+Which solutions should dress for wins real-time trend analysis using the Cloud?  
+Cloud Dataflow, BigQuery, a Hadoop cluster and Compute Engine, or Cloud Dataproc?  
+The answer is D. Cloud Dataproc. D, a managed service that can run Hadoop application. Real-time trend analysis, refer to the case study to learn this is Hadoop and Spark.
 
 ## Preparing for Managing
 
-Managing and provisioning solution infrastructure. If you think about it, managing and provisioning are both about capacity and demand and choosing the right infrastructure components to support and adapt to the demand. External connections, know your options. Internet, VPN, Cloud Router and the various flavors of direct interconnects. Google Cloud Networking is not like other vendor networks. Not like traditional IP networks and not like other SDA networks. That's networking in the cloud and you need to know how you might handle migrating an existing data center network into a GCP network. Most confusing for cloud experts from other vendors clouds and yet it makes so much sense. A number of features of Google Cloud Networks eliminate the extra work where methods from traditional IP have been inherited out of habit. Subnetworks can extend across zones in the same region. One VM and an alternate VM can be on the same subnet but in different zones. A single firewall rule can apply to both VM's even though they're in different zones. This makes it much easier to design and implement resilient or high-availability solutions. Know your options. When would you choose which method? Have you considered backup connections? What happens if an interconnect goes down? How will you perform maintenance? Does the application need to stay up? You can create multiple VPNs for higher bandwidth or for alternate paths as backups. But, if the Internet goes down and you have one Internet provider, there's no alternative. Security in the field is practical. The goal is to raise the cost of violating the security above the value of the data. A good model of this is a castle. The bigger and higher the castle walls, the greater the treasure inside or conversely, if you have great treasure inside, you want to raise the castle walls just beyond where it would be worthwhile for someone to store in the castle. In the exam, think practical security. What's needed? Unless the requirement is compliance with the standard. Even if you comply with the standard, that might not be sufficient to meet business security requirements. Sometimes, standards are floors, the minimum allowable rather than ceilings, the maximum possible.
+Managing and provisioning solution infrastructure. If you think about it, **managing and provisioning are both about capacity and demand and choosing the right infrastructure components** to support and adapt to the demand.  
+External connections, know your options. Internet, VPN, Cloud Router and the various flavors of direct interconnects.  
+Google Cloud Networking is not like other vendor networks. Not like traditional IP networks and not like other SDN networks.  
+That's networking in the cloud and you need to know how you might handle migrating an existing data center network into a GCP network.  
+Most confusing for cloud experts from other vendors clouds and yet it makes so much sense.  
+
+A number of features of Google Cloud Networks eliminate the extra work where methods from traditional IP have been inherited out of habit.  
+Subnetworks can extend across zones in the same region.  
+One VM and an alternate VM can be on the same subnet but in different zones.  
+A single firewall rule can apply to both VM's even though they're in different zones. This makes it much easier to design and implement resilient or high-availability solutions. Know your options. When would you choose which method?  
+Have you considered backup connections?  
+What happens if an interconnect goes down?  
+How will you perform maintenance?  
+Does the application need to stay up?  
+
+You can create multiple VPNs for higher bandwidth or for alternate paths as backups. But, if the Internet goes down and you have one Internet provider, there's no alternative. Security in the field is practical.  
+The goal is to **raise the cost of violating the security above the value of the data**.  
+A good model of this is a castle. The bigger and higher the castle walls, the greater the treasure inside or conversely, if you have great treasure inside, you want to raise the castle walls just beyond where it would be worthwhile for someone to store in the castle.  
+In the exam, think practical security. What's needed? Unless the requirement is compliance with the standard. Even if you comply with the standard, that might not be sufficient to meet business security requirements.  
+Sometimes, standards are floors, the minimum allowable rather than ceilings, the maximum possible.
 
 ### Case Study 2
 
-Case study two. One thing I see with every large customer is that they have business requirements. They want a document resources. If I'm paying the bill, I want to know who's consuming resources, spinning up VMs for example, and I want to know that this is going through some sort of review process. This customer want me to minimize the impact to the developer productivity. So, as soon as you start to add any sort of process, you slow things down. They were very concerned that I would not hurt their productivity. That was both a technical requirement and a business requirement. So, a customer had this interesting business requirement. Cloud infrastructure resource provisioning must be documented and auditable. Changes to the cloud infrastructure must go through a review process, and a specific requirement must minimize impact to developer velocity. We immediately knew that part of the solution was infrastructure as code. There are a lot of reasons to implement infrastructure as code, but forcing a solution into this implementation means you get the benefits of auditing, code review, and all those things that help satisfy their business requirement. The customer has dozens of development teams, but only one cloud engineer. So, the solution needed to be distributed. Each team is actually responsible for their own process. We map that to technical requirements like this, provisioning infrastructure should be done as infrastructure as code. Specifically, decentralize approval code review process. Teams should own the process. This is how we implemented that technical requirement. We use terraform and Deployment Manager, and IAM strategy based on least privilege, service accounts, and specifically, we utilized source control options such as GitHub Enterprise. They use GitHub Enterprise with a code owners file and the file is a text file that limits who can actually perform actions in the repository.
+Case study two. One thing I see with every large customer is that they have business requirements. They want a document resources. If I'm paying the bill, I want to know who's consuming resources, spinning up VMs for example, and I want to know that this is going through some sort of review process.  
+This customer want me to minimize the impact to the developer productivity. So, as soon as you start to add any sort of process, you slow things down.  
+They were very concerned that I **would not hurt their productivity**.  
+That was both a technical requirement and a business requirement. So, a customer had this interesting business requirement.  
+Cloud infrastructure resource provisioning must be **documented and auditable**.  
+Changes to the cloud infrastructure must go through a review process, and a specific requirement must minimize impact to developer velocity.  
+We immediately knew that part of the solution was **infrastructure as code.** There are a lot of reasons to implement infrastructure as code, but forcing a solution into this implementation means you get the benefits of auditing, code review, and all those things that help satisfy their business requirement.  
+The customer has dozens of development teams, but only one cloud engineer. So, the solution needed to be distributed. Each team is actually responsible for their own process. We map that to technical requirements like this, provisioning infrastructure should be done as infrastructure as code.  
+Specifically, decentralize approval code review process. Teams should own the process. This is how we implemented that technical requirement.  
+We use terraform and Deployment Manager, and IAM strategy based on least privilege, service accounts, and specifically, we utilized source control options such as GitHub Enterprise.  
+They use GitHub Enterprise with a code owners file and the file is a text file that limits who can actually perform actions in the repository.
 
-Case Study 2
-Case Study 02: Provision and Manage
+**Case Study 02: Provision and Manage**
 
 One thing I see with every large customer is that they have business requirements; they want to document resources. If I'm paying the bill, I want to know who is consuming resources, spinning up VMs for example. And I want to know that this is going through some sort of review process.
 
@@ -813,198 +875,433 @@ This customer wanted me to minimize the impact to the developer productivity. As
 
 A customer had this interesting business requirement...
 
-Cloud infrastructure resource provisioning must be documented and auditable
-Changes to the cloud infrastructure must go through a review process
-Specific: Must minimize impact to developer velocity
+- Cloud infrastructure resource provisioning must be documented and auditable
+- Changes to the cloud infrastructure must go through a review process
+- Specific: Must minimize impact to developer velocity
+
 We immediately knew that part of the solution was "infrastructure as code". There are a lot of reasons to implement infrastructure as code. But forcing a solution into this implementation means you get the benefits of auditing, code review, and all those things that help satisfy the business requirement.
 
 The customer has dozens of development teams but only one Cloud Engineer. So the solution needed to be distributed. Each team is actually responsible for owning their own process.
 
 We mapped that to technical requirements like this…
 
-Provisioning infrastructure should be done as Infrastructure as Code
-Specific: Decentralize approval/code review process. Teams should own process.
+- Provisioning infrastructure should be done as Infrastructure as Code
+- Specific: Decentralize approval/code review process. Teams should own process.
+
 And this is how we implemented that technical requirement.
 
-Terraform/Deployment Manager
-IAM Strategy - Least Privilege 
-Service Accounts
-Specific: Utilize source control options, such as Github Enterprise
+- Terraform/Deployment Manager
+- IAM Strategy - Least Privilege
+- Service Accounts
+- Specific: Utilize source control options, such as Github Enterprise
+
 They use Github Enterprise with a code owners file. The file is a text file that limits who can actually perform actions in the repository.
 
 ## Preparing for Data Processing
 
 ### Configuring individual Storage Systems
 
-Dig into the details in each storage or data option. Learning the difference between BigQuery and Cloud Bigtable and which one is a managed service and which one is serverless is not something you want to be doing during the exam. BigQuery is an inexpensive datastore for tabular data. It's cost comparable with cloud storage, so it makes sense to ingest into BigQuery and leaves the data there. Ingesting the data depends on where it's coming from. Cloud logs, gap, can directly be ingested into BQ. From pub sub, you have an API. In the most general case, you can use Dataflow and write code to ingest data in batch or stream. You could also use open source tools like Spark or Hadoop to do the processing in which case you'd use Cloud Dataproc. The analysis itself is done by BigQuery. Results can be visualized in iPython notebook like in datalab or CoLab or in third-party tools. So, BigQuery's role is in both storage and in analysis. In other words, it's a data warehousing solution. Cloud Bigtable is not a relational database. It does not support SQL queries or joins nor does it support multi-row transactions. Also, it's not a good solution for small amounts of data like less than one terabyte. If you need full SQL support for an online transaction processing system, that's OLTP, consider Cloud SQL and Cloud Spanner. Cloud Spanner is particularly suited for databases larger than about two terabytes and databases that will be written to by global clients. If you need to store immutable blobs larger than 10 megabytes such as large integers or movies, consider cloud storage. If you need to store highly structured objects or if you require support for acid transactions and SQL-like queries, consider Cloud Datastore. If you need interactive querying in an online analytical processing or OLAP system, consider BigQuery. You should probably commit this table to memory and be able to use it backwards. For example, if the exam question contains data warehouse, you should be thinking BigQuery is a candidate. GoogleCloud Platform delivers various storage service offerings which remove much of the burden of building and managing storage and infrastructure. Like Google's other cloud services, storage services free you to focus on doing what you do best and differentiating at the application or a services layer. Google's storage offerings range across the spectrum. You can use different types of storage in the same project. Cloud SQL gives you fully managed MySQL so you have relational DB and a more traditional approach to queries, cloud Datastore provides a nearly infinitely scalable schema-less solution. If you want a disk, you can mount persistent disk as a block store that can be used by a Compute Engine or just pure data and blobs, use cloud storage when that will deliver what you need. Cloud Bigtable offers companies a fast fully managed infinitely scalable NoSQL database service, ideal for web mobile and IOT applications. BigQuery is recommended as a data warehouse. BigQuery is the default storage solution for tabular data. Use CloudSQL if you need transactions, and use Cloud Bigtable if you want low latency and high throughput. Firebase differs from Cloud Datastore in many significant ways. Firebase is a mobile platform that provides features beyond storage including authentication, notifications, and real-time synchronization of clients. Cloud Datastore is a NoSQL database. Cloud Bigtable can scale to massive amounts of data, Cloud Bigtable queries can be more sophisticated than Firebase queries. The top one is a scalable web app with mobile support. Cloud Functions drive a Cloud Bigtable back-end and the bottom one is a mobile client app. Mobile clients interact with Firebase, and App Engine provides back-end processing.
+Dig into the details in each storage or data option.  
+Learning the difference between BigQuery and Cloud Bigtable and which one is a managed service and which one is serverless is not something you want to be doing during the exam.  
+**BigQuery is an inexpensive datastore for tabular data**. It's cost comparable with cloud storage, so it makes sense to ingest into BigQuery and leaves the data there.  
+Ingesting the data depends on where it's coming from.  
+**Cloud logs, gap, can directly be ingested into BQ**. From pub sub, you have an API. In the most general case, you can use Dataflow and write code to ingest data in batch or stream.  
+You could also use open source tools like Spark or Hadoop to do the processing in which case you'd use Cloud Dataproc.  
+The analysis itself is done by BigQuery.  
+Results can be visualized in iPython notebook like in datalab or CoLab or in third-party tools.  
+So, BigQuery's role is in both storage and in analysis. In other words, it's a **data warehousing solution**.  
+Cloud Bigtable is not a relational database. It does not support SQL queries or joins nor does it support multi-row transactions. Also, it's **not a good solution for small amounts of data like less than one terabyte**.  
+
+If you need full SQL support for an online transaction processing system, that's OLTP, consider Cloud SQL and Cloud Spanner. Cloud Spanner is particularly suited for databases larger than about two terabytes and databases that will be written to by global clients.  
+If you need to store immutable blobs larger than 10 megabytes such as large integers or movies, consider Cloud Ctorage.  
+If you need to store highly structured objects or if you require support for ACID transactions and SQL-like queries, consider Cloud Datastore.  
+If you need interactive querying in an online analytical processing or OLAP system, consider BigQuery. You should probably commit this table to memory and be able to use it backwards.  
+For example, **if the exam question contains data warehouse, you should be thinking BigQuery is a candidate**.  
+
+GoogleCloud Platform delivers various storage service offerings which remove much of the burden of building and managing storage and infrastructure.  
+Like Google's other cloud services, storage services free you to focus on doing what you do best and differentiating at the application or a services layer. Google's storage offerings range across the spectrum. You can use different types of storage in the same project.  
+Cloud SQL gives you fully managed MySQL so you have relational DB and a more traditional approach to queries, cloud Datastore provides a nearly infinitely scalable schema-less solution. If you want a disk, you can mount persistent disk as a block store that can be used by a Compute Engine or just pure data and blobs, use cloud storage when that will deliver what you need.  
+Cloud Bigtable offers companies a fast fully managed infinitely scalable NoSQL database service, ideal for web mobile and IOT applications. BigQuery is recommended as a data warehouse. BigQuery is the default storage solution for tabular data.  
+Use CloudSQL if you need transactions, and use Cloud Bigtable if you want low latency and high throughput.  
+Firebase differs from Cloud Datastore in many significant ways. **Firebase is a mobile platform** that provides features beyond storage including authentication, notifications, and real-time synchronization of clients.  
+Cloud Datastore is a NoSQL database.  
+Cloud Bigtable can scale to massive amounts of data, Cloud Bigtable queries can be more sophisticated than Firebase queries. The top one is a scalable web app with mobile support. Cloud Functions drive a Cloud Bigtable back-end and the bottom one is a mobile client app.  
+**Mobile clients interact with Firebase**, and App Engine provides back-end processing.
 
 ### Data transfer
 
-Global Google Cloud Network Integration with Google Cloud Storage, enables high bandwidth upload from anywhere. App Engine provides authentication and ingest coordination, and management between the network and storage. Upload is exposed to browsers through a web UI implemented on App Engine. Upload is provided for client applications via RESTful APIs exposed by Cloud Endpoints. This is an example of a lazy deletion design. There are a number of layers of soft deletion, and delay between steps that should be tuned to the application and its business requirements. Data integrity is the quality of the data remaining accurate and accessible. If the data loses accessibility or accuracy, it's no longer reliable to the system, and the users, and therefore has lost integrity. Many kinds of failure including human error can lead to data loss. Strategy is defense in depth. How long does it take to transfer data online? The left side of the table are closer to physical speeds, and the right side of the table is closer to online speeds. Therefore, it's much faster to accumulate data online and work with it and transfer it online, than to collect the data physically and then transfer it.
+Global Google Cloud Network Integration with Google Cloud Storage, enables high bandwidth upload from anywhere.  
+App Engine provides authentication and ingest coordination, and management between the network and storage. Upload is exposed to browsers through a web UI implemented on App Engine. Upload is provided for client applications via RESTful APIs exposed by Cloud Endpoints.  
+This is an example of a lazy deletion design. There are a number of layers of soft deletion, and delay between steps that should be tuned to the application and its business requirements. Data integrity is the quality of the data remaining accurate and accessible.  
+If the **data loses accessibility or accuracy, it's no longer reliable to the system**, and the users, and therefore has lost integrity. Many kinds of failure including human error can lead to data loss. Strategy is defense in depth.  
+How long does it take to transfer data online? The left side of the table are closer to physical speeds, and the right side of the table is closer to online speeds. Therefore, it's much faster to accumulate data online and work with it and transfer it online, than to collect the data physically and then transfer it.
 
 ### Cloud Storage
 
-Cloud Storage, backup is often the easiest and first cloud application for many businesses. Archive is a natural step. And once the utility and value are understood, a common follow-on step is to reduce the cost and overhead of maintaining offline archive storage such as tape libraries by directly loading them into archival storage.
-Cloud Storage offers four storage classes. Customers can associate each of their buckets with the storage class most appropriate for its use case. All of the storage classes are accessed in analogous ways using the Cloud Storage API, and all offer millisecond access times. All storage classes incur a cost per gigabyte of data storage per month, and egress and data transfer charges may apply. In addition to those charges, nearline storage also incurs an access fee per gigabyte of data read, and coldline storage incurs a higher fee per gigabyte of data read. See the Cloud Storage pricing page for more information.
+Cloud Storage backup is often the easiest and first cloud application for many businesses. Archive is a natural step. And once the utility and value are understood, a common follow-on step is to reduce the cost and overhead of maintaining offline archive storage such as tape libraries by directly loading them into archival storage.
+Cloud Storage offers four storage classes. Customers can associate each of their buckets with the storage class most appropriate for its use case. **All of the storage classes are accessed in analogous ways using the Cloud Storage API**, and all offer millisecond access times.  
+**All storage classes incur a cost per gigabyte of data storage per month**, and **egress and data transfer charges may apply**.  
+In addition to those charges, nearline storage also incurs an access fee per gigabyte of data read, and coldline storage incurs a higher fee per gigabyte of data read. See the Cloud Storage pricing page for more information.  
 First, temporary data, maybe you want to use a local disk. Standard and regional HDDs and SSDs are now supported. Regional versions have zonal redundancy.
 
 ### Data processing to Machine Learning
 
-Data Center Migration. BigQuery provides a front-end for analysis and a back-end that can read from several sources including BigQuery tables, but also CSV files in Cloud Storage. Cloud Dataproc is a managed service for Hadoop clusters, useful for processing data and returning it to Cloud Storage or BigQuery. The first step is migration from Data Center processing to Cloud Data processing. BigQuery replaces many tools and custom applications in data center, while Cloud Dataproc replaces Hadoop. Cloud Bigtable is a drop in replacement for Hbase. Machine learning is available from Cloud Dataproc using APIs, such as natural language processing or NLP. When ready, the business can move from cluster-based managed service to a serverless service, and access the full benefits of machine learning. Machine learning provides value through tagging of unstructured data, which makes it useful for specific purposes. Machine learning can also be used to recognize items and for prediction. Machine learning is more of a focus of the data engineering track rather than the cloud architect track. But it's still part of the infrastructure of a cloud architect, and it might be used for finding solutions. So, you should be familiar with the services and what they do.
+Data Center Migration. BigQuery provides a front-end for analysis and a back-end that can read from several sources including BigQuery tables, but also CSV files in Cloud Storage.  
+Cloud Dataproc is a managed service for Hadoop clusters, useful for processing data and returning it to Cloud Storage or BigQuery.  
+The first step is migration from Data Center processing to Cloud Data processing. BigQuery replaces many tools and custom applications in data center, while **Cloud Dataproc replaces Hadoop**.  
+Cloud Bigtable is a drop in replacement for Hbase. Machine learning is available from Cloud Dataproc using APIs, such as natural language processing or NLP. When ready, the business can move from cluster-based managed service to a serverless service, and access the full benefits of machine learning.  
+Machine learning provides value through tagging of unstructured data, which makes it useful for specific purposes. Machine learning can also be used to recognize items and for prediction.  
+Machine learning is more of a focus of the data engineering track rather than the cloud architect track. But it's still part of the infrastructure of a cloud architect, and it might be used for finding solutions. So, you should be familiar with the services and what they do.
 
 ## Preparing for Compute
 
 ### Configuring Compute Systems
 
-We've already covered many of these items. One thing to consider in the design is whether you can create an application that's tolerant of some amount of lost data or state and part of the system can simply drop some data or can store data externally and recover from drops. Then if that part is isolated, you can consider using Preemptible VMs for lower cost. By the way, do you remember what the maximum time is that you would have control of a Preemptible VM? It's 24 hours. If a VM hasn't been requested by then, it'll be pulled from service anyway. Development environments and disaster recovery are often good applications for creating infrastructure through automation technologies such as Deployment Manager or Terraform. In the development environment case, you can generate a clone of the production infrastructure solution or use by the development team. So the test team needs an environment, deploy another copy. Quality control needs and environment, another copy. Auditing and compliance test backup and recovery, create more deployments on demand. There's no perfect solution for all circumstances. But there are usually several options that can work and one that is optimal for a specific situation. In general, if your use case is application focused, App Engine is the fastest way to get something up and running with the least infrastructure overhead. Kubernetes is more complicated and places more responsibilities on the developer and the support staff. Fewer items in Kubernetes or automated when compared with App Engine. On the other hand, it offers controls over automation and Kubernetes can make the application platform independent which is easier for development and migration of support for different environments. Compute Engine is a VM. The software installation and maintenance gives far greater control and performance efficiency at the expense of IT overhead. Finally, Cloud functions provide a micro-services approach which means creating small stateless elements, very fast and scalable. But you have to be diligent about isolating state and there's additional programming overhead involved. You can also implement micro-services solutions on Kubernetes. This is another one of those tables that you should know backwards and forwards. For example, if a solution involves Node.js, which compute service should immediately become a candidate for part of the solution? App Engine Flex and Cloud Functions both support Node.js. First of all, there's no such thing as a load balancer in Google Cloud. Allow me to explain. In Google Cloud, there is no load balancer because the function of distributing traffic is handled by the software defined network. So there are several kinds of load balancing. But these are just features that are part of the network, not physical devices. Load balancing services are distinguished by the kind of traffic they direct. By whether they're intended to balance traffic from one server to another inside the Google Cloud or if they're intended to direct data arriving from the Internet. Also load balancing can be global or applied to a specific region. Make sure you understand the basics of how geo-distributed and load balancing works. How can everyone go to the homepage for google.com and get great response time as if from a local server? Unmanaged instance groups collect different kinds of instances. Usually, this is done for management of lift and shift existing designs and it's not recommended because it does not make the best use of the features available in cloud. Managed instance groups are all the same kinds of instances meaning that the type can be defined by an instance template and auto-scaling is available. Zonal managed instance groups keep all the instances in the same zone which is useful to provide consistent network location when the instances must communicate with similar latency and avoid zone to zone transfer. Regional managed instance groups distribute the instance and multiple zones within the region increasing reliability. Instance groups should be managed instance groups to make effective use of the cloud.
+We've already covered many of these items. One thing to consider in the design is whether you can create an application that's tolerant of some amount of lost data or state and part of the system can simply drop some data or can store data externally and recover from drops.  
+Then if that part is isolated, you can consider using **Preemptible VMs for lower cost**. By the way, do you remember what the maximum time is that you would have control of a Preemptible VM? **It's 24 hours**. If a VM hasn't been requested by then, it'll be pulled from service anyway.  
+Development environments and disaster recovery are often good applications for creating infrastructure through automation technologies such as Deployment Manager or Terraform. In the development environment case, you can generate a clone of the production infrastructure solution or use by the development team.  
+
+So the test team needs an environment, deploy another copy.  
+Quality control needs and environment, another copy.  
+Auditing and compliance test backup and recovery, create more deployments on demand. There's no perfect solution for all circumstances.  
+But there are usually several options that can work and one that is optimal for a specific situation. In general, if your use case is application focused, App Engine is the fastest way to get something up and running with the least infrastructure overhead. Kubernetes is more complicated and places more responsibilities on the developer and the support staff. Fewer items in Kubernetes are automated when compared with App Engine. On the other hand, it offers controls over automation and Kubernetes can make the application platform independent which is easier for development and migration of support for different environments.  
+Compute Engine is a VM. The software installation and maintenance gives far greater control and performance efficiency at the expense of IT overhead. Finally, Cloud functions provide a micro-services approach which means creating small stateless elements, very fast and scalable. But you have to be diligent about isolating state and there's additional programming overhead involved. You can also implement micro-services solutions on Kubernetes. This is another one of those tables that you should know backwards and forwards. For example, if a solution involves Node.js, which compute service should immediately become a candidate for part of the solution? App Engine Flex and Cloud Functions both support Node.js.  
+
+First of all, **there's no such thing as a load balancer in Google Cloud**. Allow me to explain. In Google Cloud, there is no load balancer because the function of distributing traffic is handled by the software defined network.  
+So there are several kinds of load balancing. But these are **just features that are part of the network**, not physical devices.  
+Load balancing services are distinguished by the kind of traffic they direct. By whether they're intended to balance traffic from one server to another inside the Google Cloud or if they're intended to direct data arriving from the Internet.  
+Also load balancing can be global or applied to a specific region. Make sure you understand the basics of how geo-distributed and load balancing works. How can everyone go to the homepage for google.com and get great response time as if from a local server?  
+Unmanaged instance groups collect different kinds of instances. Usually, this is done for management of lift and shift existing designs and it's not recommended because it does not make the best use of the features available in cloud.  
+**Managed instance groups** are all the same kinds of instances meaning that the type can be defined by an instance template and auto-scaling is available. **Zonal managed instance groups keep all the instances in the same zone** which is useful to provide consistent network location when the instances must communicate with similar latency and avoid zone to zone transfer.  
+Regional managed instance groups distribute the instance and multiple zones within the region increasing reliability. Instance groups should be managed instance groups to make effective use of the cloud.
 
 ### Microservices, Containers, Data Processing, and IoT
 
-Microservices is not a panacea, it doesn't fit all cases. You can implement a microservices solution in App Engine cloud functions and using Node.js and Kubernetes. The platforms have overlapping coverage. Do you know when you might choose one platform over another for microservices solution? Coordinating a transaction across stateless microservices is tricky. You have to store the state externally and retrieve and use it in each function. Microservices architectures are commonly used and implemented in Cloud Functions or in App Engine. Containers bundle application code and dependencies into a single unit, abstracting the application from the infrastructure. Make sure you know the difference between containers and VMs. Make sure you know the basics of Kubernetes. When might you use a different pod? How does code maintenance and migration to a new version work? Understand AB testing and deployment. A pod is Kubernetes engine abstraction to represent an application. It holds one or more containers. The containers in the pod share a single IP address and a single namespace. A pod can share other items such as access to storage. Any data access mattered on a pod called a volume is available to all containers in the pod. Containers that are part of the same pod are guaranteed to be scheduled together on the same VM and can share state via local volumes. Persistent volumes using persistent disks in Compute Engine survive instance and container restarts. How do you balance resiliency, scalability, and cost? Well, small stateless servers are more scalable and reliable closer to a microservices designed. Of course, you have to coordinate all the messaging and state storage and retrieval. So the cost is increased complexity. Large stateful servers reduce application complexity. They allow you to combine activities and organize them making the application more manageable. However, this comes at a cost of decreased scalability and a greater chance that if something goes wrong it will take down the service. What you want to do is blend the approaches where it makes sense to the business. This is another case where what the client wants is what's most important to the design and on an exam it means being sensitive to and looking out for those trade-offs. Services, managed services, and serverless services, knowing the differences between them will help distinguish solutions that meet all the requirements. A managed service gives you visibility to servers but limited control. You give up control for automation. It's great for popular use cases and eliminating overhead. Serverless services completely hide all servers. Generally, it's more fast scalable and efficient than you could create on your own. The key trade off their proprietary. To be fair, all services are sometimes called managed services even if they're really serverless services. I mentioned previously that there are common assemblies of services that work together. If you review solutions and diagrams, you'll start to recognize some. There's a great resource for becoming familiar with a variety of solution architectures online. Look for it at cloud.google.com/solutions. The core assembly here is IoT Core, Cloud Functions, Cloud Pub Sub, and Cloud Dataflow. The IoT core device manager. Google Cloud IoT Core provides a fully managed service for device registration, authentication, authorization, metadata and configuration. Cloud Pub Sub. Google Cloud Pub Sub provides a globally durable message ingestion service. Cloud Pub Sub can act like a shock absorber and rate level or for incoming data. Cloud Pub Sub scales to handle data spikes that can occur when swarms of devices respond to events in the physical world. It buffers these spikes to help isolate them from applications monitoring their data. Cloud Dataflow. Google Cloud Dataflow provides the open Apache beam programming model as a managed service for processing data in multiple ways including batch, extract transform load ETL patterns, and continuous streaming patterns. Cloud Dataflow performs well with high volume data processing. Cloud Functions. IoT events and data can be sent to the cloud at a high rate and need to be processed quickly. Cloud functions allow you to write custom logic that can be applied to each event as it arrives. This can be used to trigger alerts, filter invalid data, or invoke other APIs. Cloud Functions can operate on each published event individually.
+Microservices is not a panacea, it doesn't fit all cases. You can implement a microservices solution in App Engine cloud functions and using Node.js and Kubernetes.  
+The platforms have overlapping coverage. Do you know when you might choose one platform over another for microservices solution? Coordinating a transaction across stateless microservices is tricky. You have to store the state externally and retrieve and use it in each function.  
+Microservices architectures are commonly used and implemented in Cloud Functions or in App Engine. Containers bundle application code and dependencies into a single unit, abstracting the application from the infrastructure.  
+
+Make sure you know the difference between containers and VMs. Make sure you know the basics of Kubernetes. When might you use a different pod? How does code maintenance and migration to a new version work? Understand AB testing and deployment.  
+A pod is Kubernetes engine abstraction to represent an application. It holds one or more containers. The containers in the pod share a single IP address and a single namespace.  
+A pod can share other items such as access to storage. Any data access mattered on a pod called a volume is available to all containers in the pod. Containers that are part of the same pod are guaranteed to be scheduled together on the same VM and can share state via local volumes.  
+Persistent volumes using persistent disks in Compute Engine survive instance and container restarts. How do you balance resiliency, scalability, and cost?  
+
+Well, small stateless servers are more scalable and reliable closer to a microservices designed. Of course, you have to coordinate all the messaging and state storage and retrieval.  
+So the **cost is increased complexity**.  
+Large stateful servers reduce application complexity. They allow you to combine activities and organize them making the application more manageable. However, this comes at a cost of decreased scalability and a greater chance that if something goes wrong it will take down the service.  
+What you want to do is **blend the approaches where it makes sense to the business**. This is another case where what the client wants is what's most important to the design and on an exam it means being sensitive to and looking out for those trade-offs. Services, managed services, and serverless services, knowing the differences between them will help distinguish solutions that meet all the requirements.  
+
+A managed service gives you visibility to servers but limited control. You give up control for automation. It's great for popular use cases and eliminating overhead.  
+Serverless services **completely hide all servers**. Generally, it's more fast scalable and efficient than you could create on your own. The key trade off their proprietary. To be fair, all services are sometimes called managed services even if they're really serverless services.  
+I mentioned previously that there are common assemblies of services that work together. If you review solutions and diagrams, you'll start to recognize some. There's a great resource for becoming familiar with a variety of solution architectures online.  
+
+Look for it at cloud.google.com/solutions. The core assembly here is IoT Core, Cloud Functions, Cloud Pub Sub, and Cloud Dataflow. The IoT core device manager. Google Cloud IoT Core provides a fully managed service for device registration, authentication, authorization, metadata and configuration.  
+**Cloud Pub Sub**. Google Cloud Pub Sub provides a globally durable message ingestion service.  
+Cloud Pub Sub **can act like a shock absorber** and rate level or for incoming data. Cloud Pub Sub scales to handle data spikes that can occur when swarms of devices respond to events in the physical world. It buffers these spikes to help isolate them from applications monitoring their data.  
+**Cloud Dataflow**. Google Cloud Dataflow provides the open Apache Beam programming model as a managed service for processing data in multiple ways including batch, extract transform load ETL patterns, and continuous streaming patterns. Cloud Dataflow performs well with high volume data processing.  
+**Cloud Functions**. IoT events and data can be sent to the cloud at a high rate and need to be processed quickly. Cloud functions allow you to write custom logic that can be applied to each event as it arrives. This can be used to trigger alerts, filter invalid data, or invoke other APIs. Cloud Functions can operate on each published event individually.
 
 ### Experiment: Containers and GKE video (Like/Dislike)
 
-Between 2017 and 2018, the number of organizations using containers for software development had to deploy their services doubled. The trend shows no signs of slowing. For this reason, container knowledge and skill with Kubernetes is increasing the importance for the job of a Cloud architect. Of course, if you need more of these skills for the job, you will also need them to prepare for the exam. Docker is software that builds containers. User apply application code and instructions called a Docker file, and Docker follows the instructions and assembles the code and dependencies into the container. Containers can be run much as an application can run. However, it is a self-contained environment that can run on many platforms. Google Cloud offers a service called Cloud Build which functions similarly to Docker. It accepts code and configuration and builds containers. Cloud Build offers many features and services that are geared towards professional development. It is designed to fit into a continuous development, continuous deployment workflow. It is designed to scale and to handle many application developers working on, and continuously updating a live global service. If you had 100 developers sharing source files, you would need a system for managing them, for tracking them, versioning them, and enforcing a checking review and approval process. Cloud Source Repositories is a cloud-based solution. If you were deploying hundreds of containers, you would not be in keeping it to yourself. One of the reasons to use containers is to share them with others. So you need a way to manage and share them. This is the purpose of container registry. Container registry has various integrations with continuous integration, continuous deployment services. A Docker container is an image built-in layers. Each layer is created by an instruction in the Docker file. All the layers except for the top one are air locked. The thin read-write layer at the top is where you can make changes to a running container. For example, if you needed to change a file, those changes would be written here. The layer designed inside of a container isolates functions. This is what makes the container stable and portable. Here are a few of the common Docker commands. The docker build command creates the container image. The docker run command runs the container. There are other Docker commands that can help you list images, check the status of a running container, work with logs or stop a running container. You can run a container in Docker itself, as you saw with the docker run command. You can also run containers using Compute Engine. Compute Engine gives you the alternative to start up a virtual machine from a container, rather than from an OS Image Boot Disk. You also have this option when creating an instance template, which means you can create managed instance groups from containers. App Engine supports containers as custom runtimes. The main difference between the App Engine standard environment and the App Engine flexible environment is that flexible hosts applications in Docker containers. It creates Docker containers and persists them in Container Registry. A Container Orchestrator is a full service for managing, running and monitoring containers. Both App Engine flexible environment and Google Kubernetes engine are container orchestrators. Kubernetes is an open standard software. So you can run a Kubernetes cluster in your data center. Google Kubernetes engine provides Kubernetes as a managed service. A Kubernetes cluster is composed of nodes, which are a unit of hardware resources. Nodes in GKA are implemented as VMs in Compute Engine. Each node has pods. Pods are resource management units. A pod is how Kubernetes controls and manages resources needed by applications and how it executes code. Pods also give the system fine grain control over scaling. Each pod host, manages, and runs one or more containers. The containers in a pod share networking and storage. So typically, there is one container per pod, unless the containers hold closely related applications. For example, a second container might contain a logging system for the application in the first container. A pod can be moved from one node to another without reconfiguring or rebuilding anything. This design enables advanced controls and operations that gives systems built on Kubernetes unique qualities. Each cluster has a master node that determines what happens on the cluster. There are usually at least three of them for availability, and they can be located across zones. A Kubernetes job makes changes to the cluster. For example, a pod YAML file provides the information to start up and run a pod on a node. If for some reason a pod stops running or a node is lost, the pod will not automatically be replaced. The deployment YAML tells Kubernetes how many pods you want running. So the Kubernetes deployment is what keeps a number of pods running. The deployment YAML also defines a replica set, which has how many copies of a container you want running. The Kubernetes scheduler determines on which node and in which pod the replica containers are to be run. One of the advanced things that Kubernetes deployments allow you to do is roll out software to some pods and not others. So you can actually keep version in production on most of the pods and try out version B with a sample group and other pods. This is called A/B testing, and it is great because you can test the new software in a real production environment without risking the integrity of the entire service. Another thing you can do with deployments is a rolling update. Basically, you load up the new software in a replacement pod, switch the load to the new pod, and turn down the old one. This allows you to perform a controlled and gradual roll out of the new software across the service. If something goes wrong, you can detect the problem and roll back to the previous software. Really, if you are going to run an enterprise production service you will need these kinds of operations. That is one major reason to adopt Kubernetes. There are a number of subjects that were not covered in this brief overview. For example, how containers running in the same pod can share resources, how containers running in different pods can communicate, and how networking is handled between a node's IP and the applications. These subjects and more are covered in the course, getting started with Google Kubernetes engine or you can find more information in the online documentation.
+Between 2017 and 2018, the number of organizations using containers for software development had to deploy their services doubled.  
+The trend shows no signs of slowing. For this reason, container knowledge and skill with Kubernetes is increasing the importance for the job of a Cloud architect.  
+Of course, if you need more of these skills for the job, you will also need them to prepare for the exam. Docker is software that builds containers. User apply application code and instructions called a Docker file, and Docker follows the instructions and assembles the code and dependencies into the container. Containers can be run much as an application can run. However, it is a self-contained environment that can run on many platforms.  
+Google Cloud offers a service called **Cloud Build** which functions similarly to Docker. It accepts code and configuration and builds containers. Cloud Build offers many features and services that are geared towards professional development.  
+
+It is designed to fit into a continuous development, continuous deployment workflow. It is designed to scale and to handle many application developers working on, and continuously updating a live global service. If you had 100 developers sharing source files, you would need a system for managing them, for tracking them, versioning them, and enforcing a checking review and approval process.  
+**Cloud Source Repositories** is a cloud-based solution. If you were deploying hundreds of containers, you would not be in keeping it to yourself. One of the reasons to use containers is to share them with others. So you need a way to manage and share them. This is the purpose of container registry.  
+Container registry has various integrations with continuous integration, continuous deployment services. A Docker container is an image built-in layers. Each layer is created by an instruction in the Docker file. All the layers except for the top one are air locked. The thin read-write layer at the top is where you can make changes to a running container. For example, if you needed to change a file, those changes would be written here. The layer designed inside of a container isolates functions. This is what makes the container stable and portable.  
+Here are a few of the common Docker commands.  
+The docker build command creates the container image.  
+The docker run command runs the container.  
+There are other Docker commands that can help you list images, check the status of a running container, work with logs or stop a running container. You can run a container in Docker itself, as you saw with the docker run command. You can also run containers using Compute Engine.  
+
+**Compute Engine** gives you the alternative to start up a virtual machine from a container, rather than from an OS Image Boot Disk. You also have this option when creating an instance template, which means you can create managed instance groups from containers.  
+**App Engine** supports containers as custom runtimes. The main difference between the App Engine standard environment and the App Engine flexible environment is that flexible hosts applications in Docker containers. It creates Docker containers and persists them in Container Registry.  
+A Container Orchestrator is a full service for managing, running and monitoring containers. Both App Engine flexible environment and Google Kubernetes engine are container orchestrators. Kubernetes is an open standard software.  
+So you can run a Kubernetes cluster in your data center. Google Kubernetes engine provides Kubernetes as a managed service. A Kubernetes cluster is composed of nodes, which are a unit of hardware resources. Nodes in GKA are implemented as VMs in Compute Engine. Each node has pods. Pods are resource management units. A pod is how Kubernetes controls and manages resources needed by applications and how it executes code.  
+Pods also give the system fine grain control over scaling. Each pod host, manages, and runs one or more containers. The containers in a pod share networking and storage.  
+So typically, there is one container per pod, unless the containers hold closely related applications. For example, a second container might contain a logging system for the application in the first container.  
+A pod can be moved from one node to another without reconfiguring or rebuilding anything. This design enables advanced controls and operations that gives systems built on Kubernetes unique qualities.  
+Each cluster has a master node that determines what happens on the cluster. There are usually at least three of them for availability, and they can be located across zones. A Kubernetes job makes changes to the cluster. For example, a pod YAML file provides the information to start up and run a pod on a node. If for some reason a pod stops running or a node is lost, the pod will not automatically be replaced.  
+The deployment YAML tells Kubernetes how many pods you want running. So the Kubernetes deployment is what keeps a number of pods running.  
+The deployment YAML also defines a replica set, which has how many copies of a container you want running. The Kubernetes scheduler determines on which node and in which pod the replica containers are to be run.  
+One of the advanced things that Kubernetes deployments allow you to do is roll out software to some pods and not others. So you can actually keep version in production on most of the pods and try out version B with a sample group and other pods.  
+This is called A/B testing, and it is great because you can test the new software in a real production environment without risking the integrity of the entire service.  
+Another thing you can do with deployments is a rolling update. Basically, you load up the new software in a replacement pod, switch the load to the new pod, and turn down the old one. This allows you to perform a controlled and gradual roll out of the new software across the service. If something goes wrong, you can detect the problem and roll back to the previous software.  
+Really, if you are going to run an enterprise production service you will need these kinds of operations. That is one major reason to adopt Kubernetes. There are a number of subjects that were not covered in this brief overview.  
+For example, how containers running in the same pod can share resources, how containers running in different pods can communicate, and how networking is handled between a node's IP and the applications. These subjects and more are covered in the course, getting started with Google Kubernetes engine or you can find more information in the online documentation.
 
 ### Practice Exam Questions 2
 
-Which network feature could help a company meet its goals to expand service to Asia while reducing latency? HTTP/TCP load balancing, network TCP/UDP, Cloud Router, or Cloud Content Delivery Network (CDN). The answer is D, Cloud Content Delivery Network (CDN). CDN will enable a company to expand its online presence with a single IP address and global reach, leveraging Google's global network. While global load balancing is part of CDN, it won't help reduce latency to customers in Asia, whereas the cache service in CDN will do that. Network load balancing is designed to load balance from one GCP service to another to scale back end services, which is called east-west communications. North-south communications, where one part is in the GCP network and the other part is external, requires a different kind of load balancing. Cloud Router uses BGP to discover changes in network topology in a remote network, so it doesn't address latency. How can you minimize the cost of storing security video files that are processed repeatedly for 30 days? First, Regional class, then move to Coldline after 30 days; next, Nearline class, then move to Coldline after 30 days; Regional class, then move to Nearline after 30 days; or Multi-Regional class, and then move to Coldline after 30 days? The answer is A, Regional class, then move to Coldline after 30 days. The question here is answered by understanding the purpose of each of the storage classes and, in general, how they're priced. One thing to remember is that Coldline is really not intended to be read more than once a year. It's cheap to write data to it, but much more to read it back, compared to the other classes of storage. So the correct answer is A, local usage in a regional bucket for initial use during the month, then Coldline because it's unlikely to be read after that. This is often the case when data is used during the month and archived for compliance and record keeping after. The other options will not be cost effective.
+Which network feature could help a company meet its goals to expand service to Asia while reducing latency?  
+- HTTP/TCP load balancing,  
+- network TCP/UDP,  
+- Cloud Router,  
+- or Cloud Content Delivery Network (CDN).  
+
+The answer is D, Cloud Content Delivery Network (CDN).  
+CDN will enable a company to expand its online presence with a single IP address and global reach, leveraging Google's global network. While global load balancing is part of CDN, it won't help reduce latency to customers in Asia, whereas the cache service in CDN will do that.  
+Network load balancing is designed to load balance from one GCP service to another to scale back end services, which is called east-west communications. North-south communications, where one part is in the GCP network and the other part is external, requires a different kind of load balancing.  
+Cloud Router uses BGP to discover changes in network topology in a remote network, so it doesn't address latency.  
+
+How can you minimize the cost of storing security video files that are processed repeatedly for 30 days?  
+- First, Regional class, then move to Coldline after 30 days;  
+- next, Nearline class, then move to Coldline after 30 days;  
+- Regional class, then move to Nearline after 30 days;  
+- or Multi-Regional class, and then move to Coldline after 30 days?  
+
+The answer is A, Regional class, then move to Coldline after 30 days. The question here is answered by understanding the purpose of each of the storage classes and, in general, how they're priced. One thing to remember is that **Coldline is really not intended to be read more than once a year**.  
+It's cheap to write data to it, but much more to read it back, compared to the other classes of storage. So the correct answer is A, local usage in a regional bucket for initial use during the month, then Coldline because it's unlikely to be read after that. This is often the case when data is used during the month and archived for compliance and record keeping after. The other options will not be cost effective.
 
 ## Challenge Lab
 
 Problem solving is the key skill of the job.
-During the exam you will be reading a question or a case and the problem it is describing should start to inform and define a solution in your mind. The faster and more clearly you can understand the requirements and identify elements that might be part of the solution, the better the chances are that you will understand the question correctly and be able to identify the correct answer. This is what we mean by the best preparation for the exam is to be prepared for the job.
+During the exam you will be reading a question or a case and the problem it is describing should start to inform and define a solution in your mind.  
+The faster and more clearly you can **understand the requirements and identify elements that might be part of the solution**, the better the chances are that you will understand the question correctly and be able to identify the correct answer. This is what we mean by the best preparation for the exam is to be prepared for the job.
 
-Practice problem solving
-There are sample/practice exam-type questions throughout this course and a simulated exam quiz at the end. Don't just read through these or watch these for information. It is not there to teach you the right answer to a particular question. It is there to give you the opportunity to practice using your problem-solving skills, which you will need on the job and for the exam.
+**Practice problem solving**  
+There are sample/practice exam-type questions throughout this course and a simulated exam quiz at the end. Don't just read through these or watch these for information.  
+It is not there to teach you the right answer to a particular question. It is there to give you the opportunity to practice using your problem-solving skills, which you will need on the job and for the exam.
 
-Practice evaluating your own confidence about information, an answer, or a solution.
-Another skill that will help you on the job and on the exam is being able to evaluate your own confidence about your knowledge. People often assume that they either know something or they don't know it, they either recall it or they don't. But in fact, recall is much less binary than that. What we don't often get the chance to practice is evaluating how well we know something or how certain we are of answers or solutions.
+Practice evaluating your own confidence about information, an answer, or a solution.  
+Another skill that will help you on the job and on the exam is being able to evaluate your own confidence about your knowledge.  
+People often assume that they either know something or they don't know it, they either recall it or they don't. But in fact, recall is much less binary than that. What we don't often get the chance to practice is evaluating how well we know something or how certain we are of answers or solutions.
 
 This is really important. Because if you know that you are not certain of something, then you can use that as a guide to help you decide what to study, how to prioritize your study time, and how much effort to apply.
 
-This means that you learn more from missing a question and answering it incorrectly in this course than from answering it correctly. When you miss a question, it is an indicator to take note that this is something you might want to study to better prepare for the exam.
+This means that you learn more from missing a question and answering it incorrectly in this course than from answering it correctly.  
+When you miss a question, it is an indicator to take note that this is something you might want to study to better prepare for the exam.
 
-How much confidence do you want?  I will often dig into the documentation and not only prove to myself exactly why the correct answer is correct. But I will also continue studying until I know with absolute certainty exactly why each incorrect answer is wrong. I want to be able to state the reason it is not correct. Because that is how I know that I have studied enough.
+How much confidence do you want?  I will often dig into the documentation and not only prove to myself exactly why the correct answer is correct.  
+But I will also continue studying until I know with absolute certainty exactly why each incorrect answer is wrong. I want to be able to state the reason it is not correct. Because that is how I know that I have studied enough.
 
 ## Preparing for Optimizing and Operating
 
-This module covered the sections of the exams outline on optimizing and operating. You can optimize a solution for many things such as reliability, efficiency, low cost, high performance, or security. Let's begin with security and compliance. Security is a broad term. It includes privacy, authentication and authorization, and identity and access management. It could include intrusion detection, attack mitigation, resilience and recovery. So security really appears across the documentation and not in just one place. Compliance is about meeting some external guideline or standard
+This module covered the sections of the exams outline on optimizing and operating. You can optimize a solution **for many things such as reliability, efficiency, low cost, high performance, or security**.  
+Let's begin with security and compliance. Security is a broad term. It includes **privacy, authentication and authorization, and identity and access management**. It could include intrusion detection, attack mitigation, resilience and recovery. So security really appears across the documentation and not in just one place. Compliance is about meeting some external guideline or standard
 
 ### Case Study 3
 
-The following is a case study that involves a financial services company. This vertical often involves private information and transactions, so the security requirements are high. Also these kinds of companies often need a plan for audits to meet compliance requirements for certifications. This customer had a common FinServ requirement. The customer did not want any data to traverse the public Internet, for obvious reasons. So they had a security strategy that included a technical requirement to use private APIs to access Google Cloud resources. They saw this is a fundamental need to their security strategy. Additionally, they wanted to know how the cloud provider's security standard certifications, and what they did to stay current. So they were concerned that the provider might lose the certification that they were relying on for business. A large company wanted to improve their security posture, a common FinServ requirement.
-Security, business requirement, data cannot traverse the public Internet. Technical requirement, must have private API access to GCP services as a good security practice and to minimize data exfiltration. Compliance, business requirement, cloud provider must earn the trust of the business. How does Google Cloud maintain the latest standards around security, availability, process integrity, privacy, and confidentiality? The first thing we did was make sure all access to GCP was through secure methods including SSL, VPN, Interconnect and private API. We decided to use a new feature that was in alpha called VPC service control. This enables the security perimeter. For example BigQuery could placed inside a security perimeter, and then could only be accessed at a private endpoint. And then there were standards and compliance such as ISO and SOC. We provided these to the customer and they needed to sign agreements to be covered by Google's guarantees about these standards.
-We mapped that technical requirement in Google's clouds, products and services. Security, ensure all traffic to GCP is through secure methods, such as SSL, TLS, VPN, Interconnect, private APIs and endpoints. Compliance, Google Cloud has standards, regulations, and certifications that would meet their compliance requirements and help earn their trust in our platform.
-And this is how we implemented that technical requirement. VPC service controls, secure GCP API.
+The following is a case study that involves a financial services company. This vertical often involves private information and transactions, so the security requirements are high. Also these kinds of companies often need a plan for audits to meet compliance requirements for certifications.  
+This customer had a common FinServ requirement. The customer **did not want any data to traverse the public Internet**, for obvious reasons.  
+So they had a security strategy that included a technical requirement to use private APIs to access Google Cloud resources. They saw this is a fundamental need to their security strategy.  
+Additionally, they wanted to know how the cloud provider's security standard certifications, and what they did to stay current. So they were concerned that the provider might lose the certification that they were relying on for business. A large company wanted to improve their security posture, a common FinServ requirement.
+
+**Security, business requirement**, data cannot traverse the public Internet.  
+**Technical requirement**, must have private API access to GCP services as a good security practice and to minimize data exfiltration.  
+**Compliance, business requirement,** cloud provider must earn the trust of the business.  
+How does Google Cloud maintain the latest standards around security, availability, process integrity, privacy, and confidentiality?  
+The first thing we did was make sure all access to GCP was through secure methods including **SSL, VPN, Interconnect and private API**. We decided to use a new feature that was in alpha called **VPC service control**.  
+
+This enables the security perimeter. For example BigQuery could placed inside a security perimeter, and then could only be accessed at a private endpoint. And then there were standards and compliance such as ISO and SOC.  
+We provided these to the customer and they needed to sign agreements to be covered by Google's guarantees about these standards.
+We mapped that technical requirement in Google's clouds, products and services.  
+**Security**, ensure all traffic to GCP is through secure methods, such as SSL, TLS, VPN, Interconnect, private APIs and endpoints.  
+**Compliance**, Google Cloud has standards, regulations, and certifications that would meet their compliance requirements and help earn their trust in our platform.
+
+And this is how we implemented that technical requirement.  
+**VPC service controls, secure GCP API**.
 We restricted access to user GCP resources based on the Google Cloud Virtual Network or IP range. We restricted the set of Google APIs and GCP resources accessible from user's Google Cloud Virtual Network.
-Standards, regulations, and certifications. Products regularly undergo independent verification of security, privacy, compliance controls, certifications. And so ISO 27001, 27017, and 27018 and SOC 1, 2, and 3 certifications. An interesting point about both security and compliance is that it's a shared responsibility model. So although we provided secure access and layered protection, the customer needed to use IAM to manage access to its employees. And implement secure practices in its procedures. Also, the standard compliance covers the cloud resources, but not the customer's application. So they may need to take extra steps to ensure that the overall solution is compliant.
+Standards, regulations, and certifications. Products regularly undergo independent verification of security, privacy, compliance controls, certifications.  
+And so ISO 27001, 27017, and 27018 and SOC 1, 2, and 3 certifications. An interesting point about both security and compliance is that it's a shared responsibility model. So although we provided secure access and layered protection, the customer needed to **use IAM to manage access to its employees**.  
+And implement secure practices in its procedures. Also, the standard compliance covers the cloud resources, but not the customer's application. So they may need to take extra steps to ensure that the overall solution is compliant.
 
-Case Study 3
-Case 03: Security and Compliance
+**Case 03: Security and Compliance**
 
-This customer had a common FinServ requirement. The customer did not want any data to traverse the public internet, for obvious reasons. So they had a security strategy that included a technical requirement to use private APIs to access Google Cloud resources. They saw this as fundamental to their security strategy. Additionally, they wanted to know how the Cloud Provider secured Standards Certifications, and what they did to stay current. They were concerned that the provider might lose a certification that they were relying on for business.
+This customer had a common FinServ requirement. The customer did not want any data to traverse the public internet, for obvious reasons. So they had a security strategy that included a technical requirement to use private APIs to access Google Cloud resources.  
+They saw this as fundamental to their security strategy. Additionally, they wanted to know how the Cloud Provider secured Standards Certifications, and what they did to stay current. They were concerned that the provider might lose a certification that they were relying on for business.
 
 A large financial company wanted to improve their security posture, a common FinServ requirement...
 
-Security
+**Security**  
 
-Business Requirement: Data cannot traverse the public Internet. 
-Technical Requirement: Must have private API access to GCP services as a good security practice and to minimize data exfiltration.
-Compliance
+- Business Requirement: Data cannot traverse the public Internet.  
+- Technical Requirement: Must have private API access to GCP services as a good security practice and to minimize data exfiltration.
 
-Business Requirement: Cloud provider must earn the trust of the business. How does Google Cloud maintain the latest standards around security, availability, process integrity, privacy, and confidentiality?
-The first thing we did was made sure all access to GCP was through secure methods, including SSL, VPN, Interconnect, and private API. 
+**Compliance**
+
+- Business Requirement: Cloud provider must earn the trust of the business. How does Google Cloud maintain the latest standards around security, availability, process integrity, privacy, and confidentiality?  
+
+The first thing we did was made sure all access to GCP was through secure methods, including SSL, VPN, Interconnect, and private API.  
 
 We decided to use a new feature that was in alpha, called VPC Service control. https://cloud.google.com/vpc-service-controls/ This enables a security perimeter. For example, BigQuery could be placed inside a security perimeter, and then could only be accessed at a private endpoint. And then there were standards and compliance such as ISO and SOC. We provided these to the customer - and they needed to sign agreements to be covered by Google's guarantees about these standards.
 
 We mapped that to technical requirements and Google Cloud’s products and services…
 
-Security
+**Security**
 
-Ensure all traffic to GCP is through secure methods, such as SSL/TLS, VPN, Interconnect, and private APIs / private endpoints.
-Compliance
+- Ensure all traffic to GCP is through secure methods, such as SSL/TLS, VPN, Interconnect, and private APIs / private endpoints.  
 
-Google Cloud has Standards, Regulations & Certifications that would meet their compliance requirements and help earn their trust in our platform. 
+**Compliance**
+
+- Google Cloud has Standards, Regulations & Certifications that would meet their compliance requirements and help earn their trust in our platform.  
+
 And this is how we implemented that technical requirement.
 
 VPC Service Controls / Secure GCP API
 
-Restrict access to user’s GCP resources based on the Google Cloud Virtual Network or IP range. 
-Restrict the set of Google APIs and GCP resources accessible from user’s Google Cloud Virtual Network.
+- Restrict access to user’s GCP resources based on the Google Cloud Virtual Network or IP range.  
+- Restrict the set of Google APIs and GCP resources accessible from user’s Google Cloud Virtual Network.  
+
 Standards, Regulations & Certifications
 
-Products regularly undergo independent verification of:
-Security / Privacy / Compliance Controls
-Certifications
-ISO 27001, 27017, and 27018 and SOC 1, 2, and 3 certifications. 
-An interesting point about both security and compliance, is that it is a "shared responsibility" model. So although we provided secure access and layered protection, the customer needed to use IAM to manage access to its employees and implement secure practices in its procedures. Also, the standards compliance covers the cloud resources, but not the customer's application. So they may need to take extra steps to ensure that the overall solution is compliant.
+- Products regularly undergo independent verification of:  
+  - Security / Privacy / Compliance Controls
+  - Certifications  
+  - ISO 27001, 27017, and 27018 and SOC 1, 2, and 3 certifications.  
+- An interesting point about both security and compliance, is that it is a "shared responsibility" model. So although we provided secure access and layered protection, the customer needed to use IAM to manage access to its employees and implement secure practices in its procedures. Also, the standards compliance covers the cloud resources, but not the customer's application. So they may need to take extra steps to ensure that the overall solution is compliant.
 
 ## Preparing for Security and Compliance
 
 ### Designing for Security
 
-One key to securing access is to request and established groups that represent roles. Then apply the permissions to the groups, and allow the people in the organization who manage identity to assign membership to the groups. This creates a clean interface between permission management on the cloud side, and group membership on the personnel IT side. Another key to security, is to craft security permissions. The standard roles are defined for the most common use cases, but you might want to derive more granular and restricted roles by customizing them. Service accounts are a great way to separate system components, and established secure communications between components. A bastion host is a way to leverage a service account. For risky and uncommon actions, make the user admin startup and log into bastion host. From there they can borrow the service account assigned to the host to perform restricted functions. One benefit is that the login process generates logs for accountability. A policy is set on a resorts, and each policy contains a set of rules enroll members. Resources inherit policies from parents. So, a policy can be set on a resource for example, a service, and another policy can be set on a parents such as a project that contains that service. The final policy is the union of the parent policy and the resource policy. What happens when these two policies are in conflict? What if the policy on the resource only gives access to a single cloud storage bucket, and restricts access to all other buckets? However, at the project level, a rule exists that grants access to all buckets in the project. Which rule wins? The more restrictive rule on the resource or the moral general role on the project? If the parent policy is less restrictive, it overrides a more restrictive resource policy. So, in this case, the project policy wins. Folders map well to organization structure. It's a way to isolate organizations or users or products while still having them share billing and corporate resources. Commit a security checklist to memory. Sometimes just running down a list will rapidly identify a solution.
+One key to securing access is to request and established **groups** that represent **roles**. Then apply the **permissions** to the groups, and allow the people in the organization who manage identity to assign membership to the groups.  
+This creates a clean interface between permission management on the cloud side, and group membership on the personnel IT side.  
+Another key to security, is to craft security permissions. **The standard roles are defined for the most common use cases**, but you might want to derive more granular and restricted roles by customizing them.  
+**Service accounts** are a great way to separate system components, and established secure communications between components.  
+**A bastion host is a way to leverage a service account**. For risky and uncommon actions, make the user admin startup and log into bastion host.  
+From there they can borrow the service account assigned to the host to perform restricted functions.  
+
+One benefit is that the login process generates logs for accountability. A policy is set on a resorts, and each policy contains a set of rules enroll members. Resources inherit policies from parents.  
+So, a policy can be set on a resource for example, a service, and another policy can be set on a parents such as a project that contains that service.  
+**The final policy is the union of the parent policy and the resource policy**.  
+What happens when these two policies are in conflict? What if the policy on the resource only gives access to a single cloud storage bucket, and restricts access to all other buckets? However, at the project level, a rule exists that grants access to all buckets in the project.  
+Which rule wins? The more restrictive rule on the resource or the moral general role on the project? **If the parent policy is less restrictive, it overrides a more restrictive resource policy**.  
+So, in this case, the project policy wins. Folders map well to organization structure. It's a way to isolate organizations or users or products while still having them share billing and corporate resources. Commit a security checklist to memory. Sometimes just running down a list will rapidly identify a solution.
 
 ### Designing for Legal Compliance
 
-What are the two most common compliance areas? Privacy regulations such as HIPAA and GPDR, and commercial and live business standards such as PCI DSS. Google Network has layers of protection. Each layer protects and compliments the next internal layer. The main thing to know is that Google handles security up to a point, after that, the security is up to you. So, you need to know where your responsibilities begin. Secure VPC; identify optimal VPC topology, deploy distributed firewalls, control access with IAM permissions, avoid adding public IPs to instances. Access Google services internally. Cloud Interconnect, connect securely to on-prem or other cloud deployments, Private Interconnect, Carrier Interconnect, Direct Peering, VPN. Third-Party Virtual Appliances, enhance VPC security with third party appliances, Next-gen firewalls, IDS slash IPS, that's intrusion detection. Logging, monitoring, scale third-party appliances using internal load balancing so you don't create choke points in your VPC. Global Cloud Load Balancing provides edge protection and global infrastructure protection for IPv4 and IPv6. Layer three and layer four, denial of service protections. Anycast IP even if backends are in multiple regions to absorb a tax for resiliency, auto-scaling, cross-region, overflow, and cross-region failover. Google network; high-capacity, high-performance, software defined network, virtualization global networks with subnets, organizations, folders, cross-project networking, peering. Third-Party DDoS, you can complement the infrastructure with additional security from third-party providers. Here's some key concepts: Cloud Armor, Cloud Load Balancing, Cloud Firewall Rules, Service Accounts, separation into front-end and back-end, isolation of resources using separate service accounts between devices. Because of pervasive availability of firewall rules, you don't have to install a router in the network at a particular location to get firewall protection. That means you can layer the firewalls as shown in this example, because of pervasive support for Service Accounts you can lock down connections between components. When faced with a security question on an exam or in practice, determine which of the specific technologies or services is being discussed: Authentication, encryption for example, then determine exactly what the goals are for sufficient security. Is it deterrence? Is it meeting a standard for compliance? Is the goal to eliminate a particular risk or vulnerability? This will help you define a scope of a solution whether it's on an exam or in a real-world application. GCP provides several encryption options. Customer Managed encryption keys CMEK, using Cloud KMS. When you use Cloud Dataproc, cluster and job data is stored on persistent disks associated with the Compute Engine VMs in your cluster, and in a Cloud Storage bucket. The persistent disk and bucket data is encrypted using a Google-generated data encryption key called a DEK and a key encryption key called a KEK. The CMEK feature allows you to create use and revoke the key encryption key, the KEK. Google still controls the data encryption key or the DEK. Default encryption, encryption at rest uses the key management system KMS to generate KEKs and DEKs. The Key Management Service KMS allows you to generate AES-256 keys. You can use these values off Cloud. The service also handles key rotation and when a file is destroyed there is a 24-hour delay before final deletion.
+What are the two most common compliance areas?  
+Privacy regulations such as HIPAA and GPDR, and commercial and live business standards such as PCI DSS.  
+Google Network has layers of protection. Each layer protects and compliments the next internal layer. The main thing to know is that Google handles security up to a point, after that, the security is up to you. So, you need to know where your responsibilities begin.  
+**Secure VPC**; identify optimal VPC topology, deploy distributed firewalls, control access with IAM permissions, avoid adding public IPs to instances.  
+
+Access Google services internally.  
+**Cloud Interconnect**, connect securely to on-prem or other cloud deployments, Private Interconnect, Carrier Interconnect, Direct Peering, VPN.  
+Third-Party Virtual Appliances, enhance VPC security with third party appliances, Next-gen firewalls, IDS slash IPS, that's intrusion detection.  
+Logging, monitoring, scale third-party appliances using internal load balancing so you don't create choke points in your VPC.  
+**Global Cloud Load Balancing** provides edge protection and global infrastructure protection for IPv4 and IPv6. Layer three and layer four, denial of service protections.  
+
+**Anycast IP even if backends are in multiple regions** to absorb a tax for resiliency, auto-scaling, cross-region, overflow, and cross-region failover.  
+**Google network**; high-capacity, high-performance, software defined network, virtualization global networks with subnets, organizations, folders, cross-project networking, peering.  
+**Third-Party DDoS**, you can complement the infrastructure with additional security from third-party providers.  
+Here's some key concepts: Cloud Armor, Cloud Load Balancing, Cloud Firewall Rules, Service Accounts, separation into front-end and back-end, isolation of resources using separate service accounts between devices.  
+Because of pervasive availability of firewall rules, you don't have to install a router in the network at a particular location to get firewall protection. That means you can layer the firewalls as shown in this example, because of pervasive support for Service Accounts you can lock down connections between components.  
+
+When faced with a security question on an exam or in practice, **determine which of the specific technologies or services is being discussed**: Authentication, encryption for example, then determine exactly what the goals are for sufficient security.  
+Is it deterrence? Is it meeting a standard for compliance? Is the goal to eliminate a particular risk or vulnerability?  
+This will help you define a scope of a solution whether it's on an exam or in a real-world application. GCP provides several encryption options. Customer Managed encryption keys CMEK, using Cloud KMS.  
+When you use Cloud Dataproc, cluster and job data is stored on persistent disks associated with the Compute Engine VMs in your cluster, and in a Cloud Storage bucket. The persistent disk and bucket data is encrypted using a Google-generated data encryption key called a DEK and a key encryption key called a KEK.  
+**The CMEK feature** allows you to create use and revoke the key encryption key, the KEK. Google still controls the data encryption key or the DEK. Default encryption, encryption at rest uses the key management system KMS to generate KEKs and DEKs. The Key Management Service KMS allows you to generate AES-256 keys. You can use these values off Cloud. The service also handles key rotation and when a file is destroyed there is a 24-hour delay before final deletion.
 
 ### Practice Exam Questions 3
 
-Which Cloud IAM roles for security auditors requiring visibility across all projects?
-A, Org viewer, project owner.
-B, Org viewer, project viewer. 
-C, Org admin, project browser. 
-D, Project owner, network admin.
-And the answer is B, Org viewer, project viewer. This solution gives read-only access across the entire company. The other options allow changes that should not be permitted. Dress4Win security has decided to standardize on AES256 for storage device encryption. Which strategy should be used with Compute Engine instances?
-So like SSDs rather than HDDs to ensure AES256 encryption. Use the linux dm-crypt tool for whole-disk encryption. Use the Customer Supplied Encryption Keys, CSEK.
-Use open SSL for AES256 file encryption. The answer is A, Select SSDs rather than HDD to ensure AES256 encryption. Selection of disk type determines the default method for whole-disk encryption. HDDs use AES128 and SDDs use AES256. In addition to the storage system level encryption described above, in most cases, data is also encrypted at the storage device level. With at least AES128 for hard disks HDD and AES256 for new solid state drives SSD. Using a separate device level key which is different than the key used to encrypt the data at the storage level. As older devices are replaced solely AES256 will be used for device level encryption.
+Which Cloud IAM roles for security auditors requiring visibility across all projects?  
+- A, Org viewer, project owner.  
+- B, Org viewer, project viewer.  
+- C, Org admin, project browser.  
+- D, Project owner, network admin.
+
+And the answer is B, Org viewer, project viewer. This solution gives read-only access across the entire company. The other options allow changes that should not be permitted.  
+
+Dress4Win security has decided to standardize on AES256 for storage device encryption. Which strategy should be used with Compute Engine instances?  
+- So like SSDs rather than HDDs to ensure AES256 encryption.  
+- Use the linux dm-crypt tool for whole-disk encryption.  
+- Use the Customer Supplied Encryption Keys, CSEK.
+- Use open SSL for AES256 file encryption.  
+
+The answer is A, Select SSDs rather than HDD to ensure AES256 encryption.  
+Selection of disk type determines the default method for whole-disk encryption. HDDs use AES128 and SDDs use AES256. In addition to the storage system level encryption described above, in most cases, data is also encrypted at the storage device level. With at least AES128 for hard disks HDD and AES256 for new solid state drives SSD. Using a separate device level key which is different than the key used to encrypt the data at the storage level. As older devices are replaced solely AES256 will be used for device level encryption.
 
 ### Case Study 4
 
-This section covers analyzing and optimizing technical and business processes in the exam guide outline. Let's start with a case that will illustrate business requirements.
-You may have seen this situation before, the customer experiences that pushing to production is scary because you'll never know when things might break. This customer could only push to production once a month. There was significant risk of downtime and when there was downtime the application breaks and that impacts revenue. So the summary is we need to be able to develop and deploy features needed to present to production without it being an event. A customer had this interesting business requirement. Pushing to prod is a big event and happens once a month. Significant risk of downtime due to unforeseen issues. Downtime exceeds SLAs that have revenue impact. Need to develop and deploy features without burning the house down. Pushing to production should be a non-event. There are two passes through the problem in the architectural process. First, there's the business pass which includes both the business challenge and the people processes understanding what roles there are and what actions that people need to be able to take. And then there's the technical pass which is mapping all of these needs and procedures to a technical solution. We mapped that to technical requirements like this. Establish a CI/CD pipeline. Single source repo per product, git-flow as branching model. Automate build, self-testing, rapid. Automate deployment. Setup robust monitoring, logging and alerting for visibility. Promote team culture. Test Driven Development. Push often, address broken builds immediately. Transparency. Change management, and release process. To push to production on demand, we needed to analyze the development process. We figured out that a single source repo made the most sense for the whole team. We decided to go with git-flow as a branching model instead of other kinds of development. We automated the build process, but also we made sure that the builds were self testing using salt test coverage. And we measure the build process to make sure that it was rapid. We also automated the deployment of the solution software, couple of these automation with monitoring login and alerting. And you get a nice build and deploy system that can be headed off to a team. But that doesn't solve the entire problem. The system has to be used and this team was not going to be accustomed to using the development paradigm we've implemented. So we also needed to do was to enhance their processes. This primarily had to do with how test and development work together. In the new paradigm, they would start writing the testing along with development. The new way was to push reproduction off and then push early, and as soon as something would break, fix it. This meant a new team culture, one of accountability and transparency where all the stakeholders could participate in identifying and resolving a problem. And that meant change management and leadership buy-end was necessary for the technical solution to be successful And this is how we implemented that technical requirement. Cloud Source Repositories for hosting of repositories. Container Builder that builds the Docker container images. Container Registry that hosts these container images. Google Kubernetes Engine, +Helm for running and managing. And Spinnaker for CDP for continuous delivery. Cloud Load Balancing, Stackdriver, Cloud IAM, and Service Accounts and manageability constructs for proper visibility.
+This section covers analyzing and optimizing technical and business processes in the exam guide outline. Let's start with a case that will illustrate business requirements.  
+You may have seen this situation before, the customer experiences that pushing to production is scary because you'll never know when things might break.  
+This customer could only push to production once a month. There was significant risk of downtime and when there was downtime the application breaks and that impacts revenue.  
 
-Case Study 4
-Case 04: Technical and Business Processes
+So the summary is **we need to be able to develop and deploy features needed to present to production without it being an event**.  
+A customer had this interesting business requirement.  
+- Pushing to prod is a big event and happens once a month.  
+- Significant risk of downtime due to unforeseen issues.  
+- Downtime exceeds SLAs that have revenue impact.  
+- Need to develop and deploy features without burning the house down.  
+- Pushing to production should be a non-event.  
+
+There are two passes through the problem in the architectural process. First, there's the business pass which includes both the business challenge and the people processes understanding what roles there are and what actions that people need to be able to take.  
+And then there's the technical pass which is mapping all of these needs and procedures to a technical solution.  
+
+We mapped that to technical requirements like this.  
+
+Establish a CI/CD pipeline:  
+- Single source repo per product, git-flow as branching model.  
+- Automate build, self-testing, rapid.  
+- Automate deployment.  
+- Setup robust monitoring, logging and alerting for visibility.  
+
+Promote team culture:  
+- Test Driven Development.  
+- Push often, address broken builds immediately.  
+- Transparency.  
+- Change management, and release process.  
+
+To push to production on demand, we needed to analyze the development process. We figured out that a single source repo made the most sense for the whole team. We decided to go with git-flow as a branching model instead of other kinds of development.  
+We automated the build process, but also we made sure that the builds were self testing using salt test coverage.  
+And we measure the build process to make sure that it was rapid.  
+We also automated the deployment of the solution software, couple of these automation with monitoring login and alerting. And you get a nice build and deploy system that can be headed off to a team. But that doesn't solve the entire problem.  
+The system has to be used and this team was not going to be accustomed to using the development paradigm we've implemented. So we also needed to do was to enhance their processes.  
+This primarily had to do with how test and development work together. In the new paradigm, they would start writing the testing along with development. The new way was to push reproduction off and then push early, and as soon as something would break, fix it.  
+This meant a new team culture, one of accountability and transparency where all the stakeholders could participate in identifying and resolving a problem. And that meant change management and leadership buy-end was necessary for the technical solution to be successful  
+
+And this is how we implemented that technical requirement.  
+Cloud Source Repositories for hosting of repositories.  
+Container Builder that builds the Docker container images.  
+Container Registry that hosts these container images.  
+Google Kubernetes Engine, +Helm for running and managing.  
+And Spinnaker for CDP for continuous delivery.  
+Cloud Load Balancing, Stackdriver, Cloud IAM, and Service Accounts and manageability constructs for proper visibility.
+
+**Case 04: Technical and Business Processes**
 
 You may have seen this situation before. The customer experience is that pushing to production is scary, because you never know when things might break. This customer could only push to production once a month. There was significant risk of downtime. And when there was downtime, the application breaks, and that impacts revenue. So the summary is… we need to be able to develop and deploy features, need to present to production, without it being an event.
 
 A customer had this interesting business requirement...
 
-Pushing to Prod is a big event and happens once a month.
-Significant risk of downtime due to unforeseen issues.
-Downtimes exceeding SLA have revenue impact.
-Need to develop and deploy features without burning the house down. Pushing to Prod should be a non-event.
+- Pushing to Prod is a big event and happens once a month.
+- Significant risk of downtime due to unforeseen issues.
+- Downtimes exceeding SLA have revenue impact.
+- Need to develop and deploy features without burning the house down. Pushing to Prod should be a non-event.
+
 There are two passes through the problem in the architectural process. First, there is the business pass, which includes both the business challenge and the people processes - understanding what roles there are and what actions the people need to be able to take. And then there is the technical pass which is mapping all these needs and procedures to a technical solution.
 
 We mapped that to technical requirements like this…
 
 Establish CI/CD pipeline:
 
-Single source repo per product; git-flow as branching model.
-Automate build, self-testing, rapid. 
-Automate deployment.
-Setup robust monitoring, logging and alerting for visibility.
+- Single source repo per product; git-flow as branching model.
+- Automate build, self-testing, rapid. 
+- Automate deployment.
+- Setup robust monitoring, logging and alerting for visibility.
+
 Promote team culture:
 
-Test Driven Development.
-Push often, address broken builds immediately.
-Transparency.
-Change management / Release process.
+- Test Driven Development.
+- Push often, address broken builds immediately.
+- Transparency.
+- Change management / Release process.
+
 To push to production on demand, we needed to analyze the development process. We figured out that a single source repo made the most sense for the whole team. We decided to go with git-flow as a branching model instead of other kinds of development. We automated the build process. But also we made sure that the builds were self-testing using SALT test coverage. And we measured the build process and made sure that it was rapid. We also automated the deployment of the solution software. Couple this automation with monitoring, logging, and alerting, and you get a nice build-and-deploy system that can be handed off to a team.
 
 But that doesn't solve the entire problem. The system has to be used. And this team was not going to be accustomed to using the development paradigm we had implemented. So we also needed to do was enhance their processes. This primarily had to do with how test and development worked together. In the new paradigm they would start writing the testing along with development. The new way was to push to production often and push early, and as soon as something break -- fix it. This meant a new team culture, one of accountability and transparency. Where all the stakeholders could participate in identifying and resolving a problem. And that meant change management and leadership buy-in was necessary for the technical solution to be successful.
 
 And this is how we implemented that technical requirement.
 
-Cloud Source Repositories - for hosting their repositories
-Container Builder - that builds the docker container images
-Container Registry - that hosts those container images
-Google Kubernetes Engine + Helm - for running and managing
-Spinnaker - for CDP - continuous deliver
-Cloud Load Balancing, Stackdriver, Cloud IAM + Service Accounts - management constructs for proper visibility
+- Cloud Source Repositories - for hosting their repositories
+- Container Builder - that builds the docker container images
+- Container Registry - that hosts those container images
+- Google Kubernetes Engine + Helm - for running and managing
+- Spinnaker - for CDP - continuous deliver
+- Cloud Load Balancing, Stackdriver, Cloud IAM + Service Accounts - management constructs for proper visibility
 
 ## Preparing for Analyzing Processes
 
