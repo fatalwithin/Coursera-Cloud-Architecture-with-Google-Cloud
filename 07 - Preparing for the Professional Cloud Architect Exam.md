@@ -578,7 +578,7 @@ A few key points. The first one is that this is not an ERP project. ERP is elect
 In any case, TerramEarth has decided that ERP should be an upgrade for another day. They'll stick with current surplus supply levels and maintain the same supply chain as today.  
 They're happy just to provide visibility to supply partners. Change is already occurring in the management team through retraining management about emerging opportunities. TerramEarth realizes that the technical staff will need to be trained on the new systems and solutions. Moving the data warehouse to BigQuery will handle a lot of the main customer and business issues having to do with parts delay.  
 It will need a **front end** that can handle today's IoT demands and will grow and adapt to the changing categories of demand as more streaming solutions are employed and fewer file-based solutions.  
-Keep in mind that **Cloud IoT core** doesn't suffice to get your data to cloud storage. Cloud IoT core b**rokers between IoT devices and Cloud Pub Sub**.  
+Keep in mind that **Cloud IoT core** doesn't suffice to get your data to cloud storage. Cloud IoT core **brokers between IoT devices and Cloud Pub Sub**.  
 You'll almost certainly want Cloud Dataflow to get the data to the next place. For vehicles that store and upload their data, the service will need to handle 900 terabytes of batch data transfer each day.  
 Go ahead and define your solution. Consider how you would design this solution for a real customer. What are the questions you want to ask to help clarify your design? When you're ready, we'll look at one sample solution
 
@@ -748,7 +748,7 @@ We needed to set up processes for establishing new project creation and who woul
 
 ### Designing a solution infrastructure that meets technical requirements
 
-If a requirement is not described fully, perhaps it's not important to the question being asked.  
+**If a requirement is not described fully, perhaps it's not important to the question being asked**.  
 Notice that the exam guide highlights fail-over right next to elasticity. Why would that be the case? Well, consider this example.  
 A client comes to you and says, "We're happy with our data center solution. We want to use the cloud, but only for fail-over and disaster recovery. Can you help?"  
 So, you provide an IT solution in the cloud that gives them a disaster recovery scenario and fail-over capabilities. So, if elements of their existing solution go down, the cloud can provide an alternative.  
@@ -759,7 +759,7 @@ Some more time goes by and the client isn't happy with their colo. They're payin
 Of course you help them. Now, this is a very common adoption pattern. This is a natural and orderly progression of events. Now, you see why they're located together in the exam guide.  
 For the exam, you need to think about what you would measure in the situation. You might not need to calculate anything, but knowing what you need to be measured will help you focus on what information is important in this question.  
 
-Architectural principles. Compose simple services and evolve them, plan to avoid conditions that would lead to failure such as bottlenecks, consider the hardware or service limitations in the cloud, but also plan for resiliency and fast recovery when failure occurs. Consider the time value of the result of the solution.  
+**Architectural principles**. Compose simple services and evolve them, plan to avoid conditions that would lead to failure such as bottlenecks, consider the hardware or service limitations in the cloud, but also plan for resiliency and fast recovery when failure occurs. Consider the time value of the result of the solution.  
 Here's an **example**. If a data processing job takes 3,000 years to run, the proposed method might not fit the business requirements and an alternate solution might be better. An old business saying, in business, all values are real-time values. Meaning that you might want to determine when a metric might change or how this will affect the value to the business.  
 So, time value, what happens if the solution is delivered sooner or later? In a design class, we often say that all values are real time. In this case, constant value might not have any additional value if it's delivered earlier or later.  
 Here's **example two**. This is a solution that has additional value if delivered sooner. So, the sooner it's delivered, the more value it provides.  
@@ -779,10 +779,12 @@ All of that information needs to be remembered for the work to proceed is called
 The assembly line doesn't need to keep track of state. However, the units or microservices have to coordinate with each other.  
 So, **queuing and messaging** becomes important as an alternative to keeping state. You can't get away from state in all cases.  
 In those cases, you have to try to make state **scalable** and **reliable** and that leads to another common design pattern you'll want to know. Familiarize yourself with common design patterns, not just what they are, but how they work. It can come in handy to imagine the question in the context of a solution.  
-For example, dividing the problem solution into front-end and back-end, stateless and stateful can be very helpful in surfacing the key design issues. There are resources, for example, architectures in our online documentation. The design shown is a general solution. It doesn't fit all cases, but is very common.  
-First there's a scalable front-end with fail-over.  
-Second are many small stateless servers for back-end scalability.  
-Third, is the state information isolated and separated from the front and back-end.
+For example, dividing the problem solution into front-end and back-end, stateless and stateful can be very helpful in surfacing the key design issues. There are resources, for example, architectures in our online documentation.  
+
+The design shown is a general solution. It doesn't fit all cases, but is very common.  
+**First** there's a scalable front-end with fail-over.  
+**Second** are many small stateless servers for back-end scalability.  
+**Third**, is the state information isolated and separated from the front and back-end.
 
 ### Designing Network, Storage, and Compute Resources
 
@@ -792,8 +794,8 @@ It helps to narrow down your options first based on what could work, and then de
 For example, the current system can support X number of users, and the goal is to support Y number of users.  
 What's the bottleneck in the current design? Is it bandwidths, gigabytes, queries per second? Where will the application hit its limits? This is often the factor that determines which solution is best in the circumstance.  
 
-You need to be able to **read data flow diagrams** and to clearly think about the progression of data through a system. Don't assume that data-flow symmetrically, or that the capacities are symmetrical. Acid versus base is essential data knowledge that you'll want to be very familiar with, so that you can easily determine whether a particular data solution is compatible with requirements identified in the case.  
-For example, for a financial transaction, **a service that provides only eventual consistently might be incompatible**. Did you know that **in some cases and eventually consistent solution can be made strongly consistent for a specific limited use case**?  
+You need to be able to **read data flow diagrams** and to clearly think about the progression of data through a system. Don't assume that data flows symmetrically, or that the capacities are symmetrical. ACID versus BASE (basically available, soft state, eventual consistency) is essential data knowledge that you'll want to be very familiar with, so that you can easily determine whether a particular data solution is compatible with requirements identified in the case.  
+For example, for a financial transaction, **a service that provides only eventual consistently might be incompatible**. Did you know that **in some cases an eventually consistent solution can be made strongly consistent for a specific limited use case**?  
 In Cloud Datastore, there are only two APIs that provide a strongly consistent view for reading entity values and indexes.  
 First, **the lookup by key method** and second, **the ancestor query**. Database services provide a model of consistency. Consistency makes certain guarantees with respect to data transactions.  
 Whatever guarantees are not made by the data service becomes a responsibility of the application code. You should know the definition and significance of atomicity, consistency, isolation, and durability.
@@ -818,17 +820,23 @@ Often the design isn't done at hand-off. In practice, most cloud architects are 
 
 ### Practice Exam Questions 1
 
-Application parts developed by separate project teams will communicate over RfC 1918 addresses. 
-Single project, same VPC.  
-Shared VPC each project a service of the shared VPC project.  
-Parts communicate using HTTPS.  
-Communicate over Global Load balancers, one per project.  
+Application parts developed by separate project teams will communicate over RfC 1918 addresses.  
+- Single project, same VPC.  
+- Shared VPC each project a service of the shared VPC project.  
+- Parts communicate using HTTPS.  
+- Communicate over Global Load balancers, one per project.  
 
-The answer is B. Shared VPC, each project a service of the shared VPC project. Each team has their own project but communicates securely over a single RFC 1918 address space. The specific configuration is called shared VPC. VPC network peering, and it's described in the documentation on VPC peering.  
+The answer is B.  
+Shared VPC, each project a service of the shared VPC project. Each team has their own project but communicates securely over a single RFC 1918 address space. The specific configuration is called shared VPC. VPC network peering, and it's described in the documentation on VPC peering.  
 
 Which solutions should dress for wins real-time trend analysis using the Cloud?  
-Cloud Dataflow, BigQuery, a Hadoop cluster and Compute Engine, or Cloud Dataproc?  
-The answer is D. Cloud Dataproc. D, a managed service that can run Hadoop application. Real-time trend analysis, refer to the case study to learn this is Hadoop and Spark.
+- Cloud Dataflow,  
+- BigQuery,  
+- a Hadoop cluster and Compute Engine,  
+- Cloud Dataproc  
+
+The answer is D. Cloud Dataproc.  
+D, a managed service that can run Hadoop application. Real-time trend analysis, refer to the case study to learn this is Hadoop and Spark.
 
 ## Preparing for Managing
 
@@ -861,10 +869,12 @@ They were very concerned that I **would not hurt their productivity**.
 That was both a technical requirement and a business requirement. So, a customer had this interesting business requirement.  
 Cloud infrastructure resource provisioning must be **documented and auditable**.  
 Changes to the cloud infrastructure must go through a review process, and a specific requirement must minimize impact to developer velocity.  
+
 We immediately knew that part of the solution was **infrastructure as code.** There are a lot of reasons to implement infrastructure as code, but forcing a solution into this implementation means you get the benefits of auditing, code review, and all those things that help satisfy their business requirement.  
 The customer has dozens of development teams, but only one cloud engineer. So, the solution needed to be distributed. Each team is actually responsible for their own process. We map that to technical requirements like this, provisioning infrastructure should be done as infrastructure as code.  
-Specifically, decentralize approval code review process. Teams should own the process. This is how we implemented that technical requirement.  
-We use terraform and Deployment Manager, and IAM strategy based on least privilege, service accounts, and specifically, we utilized source control options such as GitHub Enterprise.  
+Specifically, **decentralize approval code review process**. Teams should own the process.  
+This is how we implemented that technical requirement.  
+We use Terraform and Deployment Manager, and IAM strategy based on least privilege, service accounts, and specifically, we utilized source control options such as GitHub Enterprise.  
 They use GitHub Enterprise with a code owners file and the file is a text file that limits who can actually perform actions in the repository.
 
 **Case Study 02: Provision and Manage**
@@ -912,20 +922,20 @@ Results can be visualized in iPython notebook like in datalab or CoLab or in thi
 So, BigQuery's role is in both storage and in analysis. In other words, it's a **data warehousing solution**.  
 Cloud Bigtable is not a relational database. It does not support SQL queries or joins nor does it support multi-row transactions. Also, it's **not a good solution for small amounts of data like less than one terabyte**.  
 
-If you need full SQL support for an online transaction processing system, that's OLTP, consider Cloud SQL and Cloud Spanner. Cloud Spanner is particularly suited for databases larger than about two terabytes and databases that will be written to by global clients.  
-If you need to store immutable blobs larger than 10 megabytes such as large integers or movies, consider Cloud Ctorage.  
-If you need to store highly structured objects or if you require support for ACID transactions and SQL-like queries, consider Cloud Datastore.  
-If you need interactive querying in an online analytical processing or OLAP system, consider BigQuery. You should probably commit this table to memory and be able to use it backwards.  
+If you need full SQL support for an online transaction processing system, that's OLTP, consider **Cloud SQL** and **Cloud Spanner**. Cloud Spanner is particularly suited for databases larger than about two terabytes and databases that will be written to by global clients.  
+If you need to store immutable blobs larger than 10 megabytes such as large integers or movies, consider **Cloud Storage**.  
+If you need to store highly structured objects or if you require support for ACID transactions and SQL-like queries, consider **Cloud Datastore**.  
+If you need interactive querying in an online analytical processing or OLAP system, consider **BigQuery**. You should probably commit this table to memory and be able to use it backwards.  
 For example, **if the exam question contains data warehouse, you should be thinking BigQuery is a candidate**.  
 
 GoogleCloud Platform delivers various storage service offerings which remove much of the burden of building and managing storage and infrastructure.  
 Like Google's other cloud services, storage services free you to focus on doing what you do best and differentiating at the application or a services layer. Google's storage offerings range across the spectrum. You can use different types of storage in the same project.  
-Cloud SQL gives you fully managed MySQL so you have relational DB and a more traditional approach to queries, cloud Datastore provides a nearly infinitely scalable schema-less solution. If you want a disk, you can mount persistent disk as a block store that can be used by a Compute Engine or just pure data and blobs, use cloud storage when that will deliver what you need.  
-Cloud Bigtable offers companies a fast fully managed infinitely scalable NoSQL database service, ideal for web mobile and IOT applications. BigQuery is recommended as a data warehouse. BigQuery is the default storage solution for tabular data.  
-Use CloudSQL if you need transactions, and use Cloud Bigtable if you want low latency and high throughput.  
+**Cloud SQL** gives you fully managed MySQL so you have relational DB and a more traditional approach to queries, cloud Datastore provides a nearly infinitely scalable schema-less solution. If you want a disk, you can mount persistent disk as a block store that can be used by a Compute Engine or just pure data and blobs, use cloud storage when that will deliver what you need.  
+**Cloud Bigtable** offers companies a fast fully managed infinitely scalable NoSQL database service, ideal for web mobile and IOT applications. BigQuery is recommended as a data warehouse. BigQuery is the default storage solution for tabular data.  
+Use **CloudSQL** if you need transactions, and use Cloud Bigtable if you want low latency and high throughput.  
 Firebase differs from Cloud Datastore in many significant ways. **Firebase is a mobile platform** that provides features beyond storage including authentication, notifications, and real-time synchronization of clients.  
-Cloud Datastore is a NoSQL database.  
-Cloud Bigtable can scale to massive amounts of data, Cloud Bigtable queries can be more sophisticated than Firebase queries. The top one is a scalable web app with mobile support. Cloud Functions drive a Cloud Bigtable back-end and the bottom one is a mobile client app.  
+**Cloud Datastore** is a NoSQL database.  
+**Cloud Bigtable** can scale to massive amounts of data, Cloud Bigtable queries can be more sophisticated than Firebase queries. The top one is a scalable web app with mobile support. **Cloud Functions** drive a Cloud Bigtable back-end and the bottom one is a mobile client app.  
 **Mobile clients interact with Firebase**, and App Engine provides back-end processing.
 
 ### Data transfer
@@ -947,9 +957,9 @@ First, temporary data, maybe you want to use a local disk. Standard and regional
 ### Data processing to Machine Learning
 
 Data Center Migration. BigQuery provides a front-end for analysis and a back-end that can read from several sources including BigQuery tables, but also CSV files in Cloud Storage.  
-Cloud Dataproc is a managed service for Hadoop clusters, useful for processing data and returning it to Cloud Storage or BigQuery.  
+**Cloud Dataproc** is a managed service for Hadoop clusters, useful for processing data and returning it to Cloud Storage or BigQuery.  
 The first step is migration from Data Center processing to Cloud Data processing. BigQuery replaces many tools and custom applications in data center, while **Cloud Dataproc replaces Hadoop**.  
-Cloud Bigtable is a drop in replacement for Hbase. Machine learning is available from Cloud Dataproc using APIs, such as natural language processing or NLP. When ready, the business can move from cluster-based managed service to a serverless service, and access the full benefits of machine learning.  
+**Cloud Bigtable** is a drop-in replacement for **Hbase**. Machine learning is available from Cloud Dataproc using APIs, such as natural language processing or NLP. When ready, the business can move from cluster-based managed service to a serverless service, and access the full benefits of machine learning.  
 Machine learning provides value through tagging of unstructured data, which makes it useful for specific purposes. Machine learning can also be used to recognize items and for prediction.  
 Machine learning is more of a focus of the data engineering track rather than the cloud architect track. But it's still part of the infrastructure of a cloud architect, and it might be used for finding solutions. So, you should be familiar with the services and what they do.
 
@@ -970,10 +980,10 @@ Compute Engine is a VM. The software installation and maintenance gives far grea
 First of all, **there's no such thing as a load balancer in Google Cloud**. Allow me to explain. In Google Cloud, there is no load balancer because the function of distributing traffic is handled by the software defined network.  
 So there are several kinds of load balancing. But these are **just features that are part of the network**, not physical devices.  
 Load balancing services are distinguished by the kind of traffic they direct. By whether they're intended to balance traffic from one server to another inside the Google Cloud or if they're intended to direct data arriving from the Internet.  
-Also load balancing can be global or applied to a specific region. Make sure you understand the basics of how geo-distributed and load balancing works. How can everyone go to the homepage for google.com and get great response time as if from a local server?  
+Also load balancing can be **global** or applied to a **specific region**. Make sure you understand the basics of how geo-distributed and load balancing works. How can everyone go to the homepage for google.com and get great response time as if from a local server?  
 Unmanaged instance groups collect different kinds of instances. Usually, this is done for management of lift and shift existing designs and it's not recommended because it does not make the best use of the features available in cloud.  
 **Managed instance groups** are all the same kinds of instances meaning that the type can be defined by an instance template and auto-scaling is available. **Zonal managed instance groups keep all the instances in the same zone** which is useful to provide consistent network location when the instances must communicate with similar latency and avoid zone to zone transfer.  
-Regional managed instance groups distribute the instance and multiple zones within the region increasing reliability. Instance groups should be managed instance groups to make effective use of the cloud.
+Regional managed instance groups distribute the instance and multiple zones within the region increasing reliability. **Instance groups should be managed instance groups** to make effective use of the cloud.
 
 ### Microservices, Containers, Data Processing, and IoT
 
@@ -1157,7 +1167,7 @@ Standards, Regulations & Certifications
 ### Designing for Security
 
 One key to securing access is to request and established **groups** that represent **roles**. Then apply the **permissions** to the groups, and allow the people in the organization who manage identity to assign membership to the groups.  
-This creates a clean interface between permission management on the cloud side, and group membership on the personnel IT side.  
+This creates a clean interface b**etween permission management on the cloud side, and group membership** on the personnel IT side.  
 Another key to security, is to craft security permissions. **The standard roles are defined for the most common use cases**, but you might want to derive more granular and restricted roles by customizing them.  
 **Service accounts** are a great way to separate system components, and established secure communications between components.  
 **A bastion host is a way to leverage a service account**. For risky and uncommon actions, make the user admin startup and log into bastion host.  
@@ -1186,7 +1196,7 @@ Logging, monitoring, scale third-party appliances using internal load balancing 
 **Anycast IP even if backends are in multiple regions** to absorb a tax for resiliency, auto-scaling, cross-region, overflow, and cross-region failover.  
 **Google network**; high-capacity, high-performance, software defined network, virtualization global networks with subnets, organizations, folders, cross-project networking, peering.  
 **Third-Party DDoS**, you can complement the infrastructure with additional security from third-party providers.  
-Here's some key concepts: Cloud Armor, Cloud Load Balancing, Cloud Firewall Rules, Service Accounts, separation into front-end and back-end, isolation of resources using separate service accounts between devices.  
+Here's some **key concepts**: Cloud Armor, Cloud Load Balancing, Cloud Firewall Rules, Service Accounts, separation into front-end and back-end, isolation of resources using separate service accounts between devices.  
 Because of pervasive availability of firewall rules, you don't have to install a router in the network at a particular location to get firewall protection. That means you can layer the firewalls as shown in this example, because of pervasive support for Service Accounts you can lock down connections between components.  
 
 When faced with a security question on an exam or in practice, **determine which of the specific technologies or services is being discussed**: Authentication, encryption for example, then determine exactly what the goals are for sufficient security.  
@@ -1248,18 +1258,18 @@ Promote team culture:
 To push to production on demand, we needed to analyze the development process. We figured out that a single source repo made the most sense for the whole team. We decided to go with git-flow as a branching model instead of other kinds of development.  
 We automated the build process, but also we made sure that the builds were self testing using salt test coverage.  
 And we measure the build process to make sure that it was rapid.  
-We also automated the deployment of the solution software, couple of these automation with monitoring login and alerting. And you get a nice build and deploy system that can be headed off to a team. But that doesn't solve the entire problem.  
+We also automated the deployment of the solution software, couple of these automation with monitoring, logging and alerting. And you get a nice build and deploy system that can be headed off to a team. But that doesn't solve the entire problem.  
 The system has to be used and this team was not going to be accustomed to using the development paradigm we've implemented. So we also needed to do was to enhance their processes.  
 This primarily had to do with how test and development work together. In the new paradigm, they would start writing the testing along with development. The new way was to push reproduction off and then push early, and as soon as something would break, fix it.  
 This meant a new team culture, one of accountability and transparency where all the stakeholders could participate in identifying and resolving a problem. And that meant change management and leadership buy-end was necessary for the technical solution to be successful  
 
 And this is how we implemented that technical requirement.  
-Cloud Source Repositories for hosting of repositories.  
-Container Builder that builds the Docker container images.  
-Container Registry that hosts these container images.  
-Google Kubernetes Engine, +Helm for running and managing.  
-And Spinnaker for CDP for continuous delivery.  
-Cloud Load Balancing, Stackdriver, Cloud IAM, and Service Accounts and manageability constructs for proper visibility.
+- Cloud Source Repositories for hosting of repositories.  
+- Container Builder that builds the Docker container images.  
+- Container Registry that hosts these container images.  
+- Google Kubernetes Engine, +Helm for running and managing.  
+- And Spinnaker for CDP for continuous delivery.  
+- Cloud Load Balancing, Stackdriver, Cloud IAM, and Service Accounts and manageability constructs for proper visibility.
 
 **Case 04: Technical and Business Processes**
 
@@ -1305,140 +1315,389 @@ And this is how we implemented that technical requirement.
 
 ## Preparing for Analyzing Processes
 
-There are a number of items to review on this slide. Two of them are related and important for you to know. The first is the concept of an error budget. Some companies arbitrarily make a goal of 100 percent like 100 percent up-time but that isn't realistic. We exist in a quantum mechanical universe where random events happen. So, 100 percent isn't really physically possible most of the time. So, at Google, we understand that some amount of time will be spent in error. What we do is identify and manage that time. So, if you have 99 percent up-time, then you have an error budget of one percent. If you find that you've not used all one percent of the error budget during that period, then it's time to do some things that are potentially disruptive. That leads me to a second point and that is about backup and disaster recovery. We often say people don't care about backup, they care about restore. But how do you know that the restore processes are working if you don't try them? If you did a backup last year and you've been consistently generating backups since that time, what are the chances the restore process will work? That's a good thing to do with that extra error budget. It's handy to have a testing checklist in mind to help you consider all options. Consider the questions you're trying to answer with testing. Will the solution support the number of users? Will it handle peak traffic? Is latency acceptable? And so forth. The test environment should resemble production as closely as possible. If you can, test on a part of the production service during a low-use time such as at night. That's called a Dark Launch. If you can't do that, test in pre-production using a synthetic workload that closely resembles a real workload. The results could be misleading if the workload is not designed well. The pricing calculator is very handy for comparing different configurations and identifying cost-effective alternatives. The pricing calculator can be used with BigQuery to estimate the cost of a query before you submit it. The basic advice for optimizing VM cost is use the right size VM and the right resources, customize if necessary. You can use what-if scenarios to see how changing the design can influence cost. For example, which is more cost effective, four machines with eight CPUs or eight machines with four CPUs or 32 machines with one CPU? The GCP console gives you price estimates in the interface when you're configuring the instance. Preemptible VMs can be a great way to scale out. The important thing to remember is that the application has to be designed to handle the loss of any of the preemptible workers at any time. There are committed use discounts and sustained use discounts. Sustained use is when you use the same kind of instances in the same location, and an automatic discount kicks in. Committed use discounts is where you reserve resources and commit to using them in advance at a discounted rate. Discounting algorithms are subject to change. Please see current discounting details in the online documentation. Optimizing disk cost has to do with two factors, size and performance. If you over-allocate disk, you'll be paying for storage capacity that you're not using. It's a much better idea to offload data to cloud storage so you're paying for what you use, rather than holding disk capacity that might not be used. Disk performance can be complicated but there are four factors to consider. The frequency of reads, the size of reads, the frequency of rights, and the size of rights. Generally, smaller more frequent reads and writes are less performance than longer and less frequent ones. Remember that read and write performance are usually not symmetric. Also, consider using a cash if the usage pattern involves a lot of repeated reads. Egress is free, networking cost are similar per GCP product but are build per product. So, you need to view the pricing documentation per product for the details. Example, cloud storage has standard egress cost but there are also separate charges for data migration and for cloud storage operations. Here's an example, egress between regions might be one cent per gigabyte, egress to the internet. The first terabyte to the world destinations might be 12 cents per gigabyte. For the example, I wouldn't expect to know the exact cost of egress from zone to zone or zone to Internet. But I would anticipate the need to know what activities are charged and generally, which actions are more or less expensive than other actions. For example, in a disaster recovery scenario, you'd want to recognize that the improved isolation of storing data in a separate region will be more expensive than just storing the data in a different zone in the same region.
+There are a number of items to review on this slide. Two of them are related and important for you to know.  
+The first is the concept of an **error budget**.  
+Some companies arbitrarily make a goal of 100 percent like 100 percent up-time but that isn't realistic. We exist in a quantum mechanical universe where random events happen. So, 100 percent isn't really physically possible most of the time.  
+So, at Google, we understand that **some amount of time will be spent in error**. What we do is identify and manage that time.  
+So, **if you have 99 percent up-time, then you have an error budget of one percent**. If you find that you've not used all one percent of the error budget during that period, then it's time to do some things that are potentially disruptive.  
+
+That leads me to a second point and that is about backup and disaster recovery. We often say people don't care about backup, they care about restore. But how do you know that the restore processes are working if you don't try them? If you did a backup last year and you've been consistently generating backups since that time, what are the chances the restore process will work?  
+That's a good thing to do with that extra error budget.  
+It's handy to have a testing checklist in mind to help you consider all options. Consider the questions you're trying to answer with testing.  
+Will the solution support the number of users? Will it handle peak traffic? Is latency acceptable? And so forth.  
+
+**The test environment should resemble production as closely as possible**. If you can, test on a part of the production service during a low-use time such as at night.  
+That's called a Dark Launch. If you can't do that, test in pre-production using a synthetic workload that closely resembles a real workload. The results could be misleading if the workload is not designed well. The pricing calculator is very handy for comparing different configurations and identifying cost-effective alternatives.  
+The pricing calculator can be used with BigQuery to estimate the cost of a query before you submit it.  
+The basic advice for **optimizing VM cost** is use the **right size VM and the right resources**, customize if necessary. You can use what-if scenarios to see how changing the design can influence cost.  
+For example, which is more cost effective, four machines with eight CPUs or eight machines with four CPUs or 32 machines with one CPU? The GCP console gives you price estimates in the interface when you're configuring the instance.  
+**Preemptible VMs can be a great way to scale out**. The important thing to remember is that the application has to be designed to handle the loss of any of the preemptible workers at any time.  
+There are **committed use discounts and sustained use discounts**.  
+
+**Sustained use** is when you use the same kind of instances in the same location, and an automatic discount kicks in.  
+**Committed use** discounts is where you **reserve resources and commit to using them in advance** at a discounted rate.  
+Discounting algorithms are subject to change. Please see current discounting details in the online documentation.  
+Optimizing disk cost has to do with two factors, size and performance. If you over-allocate disk, you'll be paying for storage capacity that you're not using.  
+It's a much better idea to **offload data to cloud storage** so you're paying for what you use, rather than holding disk capacity that might not be used.  
+
+Disk performance can be complicated but there are **four factors to consider**.  
+- The frequency of reads,  
+- the size of reads,  
+- the frequency of rights,  
+- and the size of rights.  
+
+Generally, smaller more frequent reads and writes are less performance than longer and less frequent ones.  
+Remember that read and write performance are usually not symmetric.  
+Also, **consider using a cache** if the usage pattern involves a lot of repeated reads. Egress is free, networking cost are similar per GCP product but are build per product. So, you need to view the pricing documentation per product for the details.  
+Example, cloud storage has standard egress cost but there are also **separate charges for data migration and for cloud storage operations**. Here's an example, egress between regions might be one cent per gigabyte, egress to the internet.  
+The first terabyte to the world destinations might be 12 cents per gigabyte. For the example, I wouldn't expect to know the exact cost of egress from zone to zone or zone to Internet. But I would anticipate the need to know what activities are charged and generally, which actions are more or less expensive than other actions.  
+For example, in a disaster recovery scenario, you'd want to recognize that the improved isolation of storing data in a separate region will be more expensive than just storing the data in a different zone in the same region.
 
 ### Analyzing and defining business processes
 
-Analyzing and defining business processes is covered in our design and process courses. Let's expand on a couple of these issues. In the change management outline item, there's a tip that says, quality is a process not a product. As a working cloud architect, you'll almost never have a job where you design and implement the technical solution and then you're done. Instead, you'll be required to stay on the project for a period after implementation and launch, to make sure that solution continues to run and stabilizes. Anticipating that, you'll want to develop process checks, and operational knobs to ensure that the solution can be monitored and adjusted during the stabilization period. So, the business processes might look like generating reports, and it might include weekly or monthly meetings to analyze the reports. It might include procedures that explains to administrators how to take action. Another item is customer success management. Only in the past few years has customer success been broken out from support. The difference is that support is there to make sure a solution continues to operate as it was designed and built. But what if the business circumstances change, or the technology changes, and the current solution is starting to drift off from the actual business needs? Customer success is about making sure that the solution continues to evolve, and remains effective and efficient for the current requirements, and uses the latest and most efficient technologies and methods. If you can exchange a server oriented architecture for a serverless service, you no longer have to be concerned about instance overhead, just the SLAs of the service. There are different hardware, CPU architecture supported in different zones. For example Sandy Bridge Aswell, Broad Well, Ivy Bridge, Skylight and so forth. There are a lot of benchmark comparisons online, and there open source CPU measurement tools that you can use. It suggested that you test your application and workload in different zones to see what differences the hardware in the zone might make. There are new persistent disk features and options released periodically. So, check the documentation online for the latest figures and details. People often assume that a persistent disk is just a hard disk, when it has different features and capabilities. Consider potential I/O burst, if you've planned on I/O based on an average, and the actual disk usage is bursty, the disk could be under provision for dealing with the bursts. Persistent disk performance scales with the size of the disk. So, if you trade up to a larger disk in your design, revisit the performance to avoid overcapacity. If you trade disk size down, check for under capacity. Potential I/Os may be constrained by CPU. An n1-standard-4 can drive a PD-SSD at capacity, and an n1-standard-16 can drive a local SSD at capacity. There are open source disk measurement tools available, and it's recommended that you run tests on your application at various sizes of data and loads, to understand not just capacity, but how the solution handle stress and overload conditions. In general, internal IPs are faster than external IPs. Even VM to VM in the same zone over external IPs can be about one gigabit per second versus 8.5 gigabits per second for internal IPs. Here's another tip. Does a default instance in Google Compute Engine know the difference between an internal and an external IP? No, it doesn't. Standard instances have one interface, and all traffic arrives on that interface. So, that means that external IP isn't added to the hardware interface to the local IP. For sizing network capacity, consider potential I/O burst. If you've planned on I/Os based on an average, and the actual traffic is bursty, it could be underprovision. Network capacity scales with the number of cores. So, if you change out the number of cores and the VM's in your design, revisit the network capacity to make sure the design does not over or under provision. What are some of the factors you should consider when estimating workload? Most common of course are the characteristics of communication and messaging, how often a request or transactions or operations performed, and how big is the payload of the request. Other factors include state changes and methods that divide work into parts, such as sharding, distributing work to multiple workers, such as pipelines, or aggregate work for efficiency, such as batching.
+Analyzing and defining business processes is covered in our design and process courses. Let's expand on a couple of these issues.  
+In the change management outline item, there's a tip that says, **quality is a process not a product**.  
+As a working cloud architect, you'll almost never have a job where you design and implement the technical solution and then you're done. Instead, you'll be required to stay on the project for a period after implementation and launch, to make sure that solution continues to run and stabilizes.  
+Anticipating that, you'll want to **develop process checks, and operational knobs** to ensure that the **solution can be monitored and adjusted** during the stabilization period. So, the business processes might look like generating reports, and it might include weekly or monthly meetings to analyze the reports. It might include procedures that explains to administrators how to take action.  
+
+Another item is customer success management. Only in the past few years has customer success been broken out from support. The difference is that support is there to make sure a solution continues to operate as it was designed and built.  
+But what if the business circumstances change, or the technology changes, and the current solution is starting to drift off from the actual business needs?  
+Customer success is about making sure that the solution continues to evolve, and remains effective and efficient for the current requirements, and uses the latest and most efficient technologies and methods.  
+If you can exchange a server oriented architecture for a serverless service, you no longer have to be concerned about instance overhead, just the SLAs of the service. There are different hardware, CPU architecture supported in different zones. For example SandyBridge, Haswell, BroadWell, Ivy Bridge, Skylight and so forth. There are a lot of benchmark comparisons online, and there open source CPU measurement tools that you can use.  
+
+It suggested that you test your application and workload in different zones to see what differences the hardware in the zone might make. There are new persistent disk features and options released periodically. So, check the documentation online for the latest figures and details. People often assume that a persistent disk is just a hard disk, when it has different features and capabilities.  
+**Consider potential I/O burst**, if you've planned on I/O based on an average, and the actual disk usage is bursty, the disk could be under provision for dealing with the bursts.  
+**Persistent disk performance scales with the size of the disk**. So, if you trade up to a larger disk in your design, revisit the performance to avoid overcapacity. If you trade disk size down, check for under capacity.  
+**Potential I/Os may be constrained by CPU**.  An n1-standard-4 can drive a PD-SSD at capacity, and an n1-standard-16 can drive a local SSD at capacity. There are open source disk measurement tools available, and it's recommended that you run tests on your application at various sizes of data and loads, to understand not just capacity, but how the solution handle stress and overload conditions.  
+
+In general, **internal IPs are faster than external IPs**. Even VM to VM in the same zone over external IPs can be about **one gigabit per second versus 8.5 gigabits per second for internal IPs**.  
+Here's another tip. **Does a default instance in Google Compute Engine know the difference between an internal and an external IP? No, it doesn't**. Standard instances have one interface, and all traffic arrives on that interface. So, that means that external IP isn't added to the hardware interface to the local IP.  
+For sizing network capacity, consider potential I/O burst. If you've planned on I/Os based on an average, and the actual traffic is bursty, it could be underprovision.  
+**Network capacity scales with the number of cores**. So, if you change out the number of cores and the VM's in your design, revisit the network capacity to make sure the design does not over or under provision. What are some of the factors you should consider when estimating workload? Most common of course are the characteristics of communication and messaging, how often a request or transactions or operations performed, and how big is the payload of the request.  
+Other factors include state changes and methods that divide work into parts, such as sharding, distributing work to multiple workers, such as pipelines, or aggregate work for efficiency, such as batching.
 
 ### Developing procedures to test resilience
 
-In this section, we'll discuss developing testing procedures. You can't test everything, so you need to consider what items can act as indicators. How do you prove that the solution is working properly? How do you know if the solution is highly available or scalable? This design illustrates that in some cases, technical design is not sufficient, but must be followed up with human procedures. The original design was intended to handle a maximum of 1000 queries per second. It was originally a functional design. However, over time, the load has grown. While the system is still operational, if one of the front end servers were to fail and the combined traffic was taken up by the other front end, the total would be 1,200 queries per second, and would be above capacity. For this reason, resiliency requires identifying key metrics, in this case total load, and periodically adjusting capacity to stay ahead of growth. On the other side, if load were diminishing consistently over time, there could be cost savings in downsizing the front end servers. A common misunderstanding is forgetting that auto-scaling follows the law of diminishing returns. Imagine that you're considering the target CPU utilization for the entire group of VMs, the percentage utilization that an additional VM contributes depends on the size of the group. The fourth VM added to a group offers 25 percent increase in capacity to the group. The tenth VM attitude group only offers 10 percent more capacity, even though the VMs are the same size. In this example, removing one VM doesn't get close enough to the target of 75 percent. Removing a second VM would exceed the target. The auto-scaler behaves conservatively, so it will shut down one VM rather than two VMs. It would prefer under utilization over running out of resource when it's needed. Now, here's a tip. Consider using Stackdriver custom metrics for auto-scaling. The reason is that CPU utilization is rarely a good measure of customer experience. A custom metric can enable auto-scaling on a more meaningful value. For example, a game service might scale with the number of players, which might be more directly related to application performance than something like CPU utilization.
+In this section, we'll discuss developing testing procedures. You can't test everything, so you need to consider what items can act as indicators.  
+How do you prove that the solution is working properly?  
+How do you know if the solution is highly available or scalable? This design illustrates that in some cases, technical design is not sufficient, but must be followed up with human procedures.  
+The original design was intended to handle a maximum of 1000 queries per second. It was originally a functional design.  
+However, over time, the load has grown. While the system is still operational, if one of the front end servers were to fail and the combined traffic was taken up by the other front end, the total would be 1,200 queries per second, and would be above capacity.  
+For this reason, **resiliency requires identifying key metrics**, in this case total load, and periodically adjusting capacity to stay ahead of growth.  
+
+On the other side, if load were diminishing consistently over time, there could be cost savings in downsizing the front end servers. A common misunderstanding is forgetting that auto-scaling follows the law of diminishing returns. Imagine that you're considering the target CPU utilization for the entire group of VMs, the percentage utilization that an additional VM contributes depends on the size of the group.  
+The fourth VM added to a group offers 25 percent increase in capacity to the group. The tenth VM attitude group **only offers 10 percent** more capacity, even though the VMs are the same size. In this example, removing one VM doesn't get close enough to the target of 75 percent. Removing a second VM would exceed the target. The auto-scaler behaves conservatively, so it will shut down one VM rather than two VMs. It would prefer under utilization over running out of resource when it's needed.  
+Now, here's a tip. **Consider using Stackdriver custom metrics for auto-scaling**. The reason is that CPU utilization is rarely a good measure of customer experience. A custom metric can enable auto-scaling on a more meaningful value. For example, a game service might scale with the number of players, which might be more directly related to application performance than something like CPU utilization.
 
 ### Practice Exam Questions 4
 
-Which of Dress4Win's requirements will Stackdriver dashboards, metrics, and reporting satisfy? Improve security by defining and adhering to a set of security and identity and access management IAM best practices for cloud. Encrypt data on the wire and at rest. Analyze and optimize architecture for performance in the cloud, or support multiple VPN connections between the production data center and cloud environment. C is the correct answer. Analyze and optimize architecture for performance in the cloud. Stackdriver metrics will help to analyze and optimize performance for the cloud, because it can be used to gather metrics and custom metrics if needed, to get to specific behavior the applications being migrated. Stackdriver does not necessarily improve security. How can a company connect cloud applications to an Oracle database in its datacenter to meet its business requirement of up to 10 gigabytes of transactions with an SLA? Implement a high-throughput cloud VPN connection. Cloud Router with VPN. Dedicated interconnect. Or partner interconnect. The correct answer is D, partner interconnect. Partner interconnect is good up to 10 gigabits per second and provides an SLA. To differentiate the options, consider their support for speed and volume of data. Cloud VPN is useful for low volume connections. Partner interconnect is useful for data up to 10 gigabits per second. Direct Interconnect is useful for data from 10 gigabits per second to 80 gigabits per second. The Cloud VPN SLA covers the availability of the VPN service not the availability of the public internet. Business Internet Service Level Agreements, SLAs from ISPs are commonly between 99 percent and 99.5 percent for a dedicated line. Therefore even though the Cloud VPN services available at 99.9 percent of the time, the communication it relies on will be down between one half percent, and one percent of the time. That doesn't meet availability requirements.
+Which of Dress4Win's requirements will Stackdriver dashboards, metrics, and reporting satisfy?  
+- Improve security by defining and adhering to a set of security and identity and access management IAM best practices for cloud.  
+- Encrypt data on the wire and at rest.  
+- Analyze and optimize architecture for performance in the cloud,  
+- support multiple VPN connections between the production data center and cloud environment.  
+
+C is the correct answer.  
+Analyze and optimize architecture for performance in the cloud. Stackdriver metrics will help to analyze and optimize performance for the cloud, because it can be used to gather metrics and custom metrics if needed, to get to specific behavior the applications being migrated. Stackdriver does not necessarily improve security.  
+
+How can a company connect cloud applications to an Oracle database in its datacenter to meet its business requirement of up to 10 gigabytes of transactions with an SLA?  
+- Implement a high-throughput cloud VPN connection.  
+- Cloud Router with VPN.  
+- Dedicated interconnect.  
+- partner interconnect.  
+
+The correct answer is D, partner interconnect.  
+Partner interconnect is good up to 10 gigabits per second and provides an SLA. To differentiate the options, consider their support for speed and volume of data.  
+**Cloud VPN is useful for low volume connections**.  
+Partner interconnect is useful for data up to 10 gigabits per second.  
+Direct Interconnect is useful for data from 10 gigabits per second to 80 gigabits per second. The Cloud VPN SLA covers the availability of the VPN service not the availability of the public internet. Business Internet Service Level Agreements, SLAs from ISPs are commonly between 99 percent and 99.5 percent for a dedicated line.  
+Therefore even though the Cloud VPN services available at 99.9 percent of the time, the communication it relies on will be down between one half percent, and one percent of the time. That doesn't meet availability requirements.
 
 ### Case Study 5
 
-This case involves Finserv, which is how people in the industry refer to financial services. There are two industries where security comes up as a priority in nearly every transaction. Can you guess them? Financial services is one because the transactions involved are both private and involve the exchange of value. The other is the healthcare industry, where a lot of the information is what they call PII or personally identifiable information. Let's see how security is handled in this financial services example. A lot of customers we see are in the enterprise space, so their needs are very similar. This example comes from a financial services company. We often see similar requirements among Finserv companies. So, a Finserv customer had this interesting business requirement. Encryption in transit and at rest for all developer operations. Follow Google Best Practices. All keys must be managed by the company. They wanted to own the keys. The real trick here is that the structure and solution had to be put into production at one time. It couldn't be built-in parts into production, it had to be all working when it went into production. That caused us to think about what parts were inherent and what parts we could automate. So, we ended up using a Jenkins Pipeline and Deployment Manager Templates for parts of this automation. We mapped that to technical requirements like this. Use Google authentication. No public IP access unless through a bastion host. No Operations team access to production environment, that means NoOps. Everything is automated. Minimize downloaded keys. Keys accounted for via business logic application. All the Google APIs are encrypted in transit and authenticated. So, that requirement was inherited and automatic. The production team needed operations access but without handing them the keys. So, what we did is implemented all operations in deployment pipelines using Jenkins and Deployment Manager. The business logic was implemented using Python in the Deployment Manager Templates. This is how we implemented that technical requirement. All Google APIs are encrypted in transit and authenticated. Production has Operations team access. All deployment pipelines via Jenkins and Deployment Manager business logic and Python templates and Deployment Manager. CloudSDK was not installed in local machines. Cloud Shell ensures that no keys are downloaded. Service Account Keys when needed for off-GCP clients are managed via deployment pipelines. There are two kinds of operations actions: on-GCP actions and off-GCP actions. For on-GCP actions, we didn't install CloudSDK on local machines. Instead, we set them up to use Cloud Shell, that ensured that no keys were downloaded. For off-GCP actions, the Service Account Keys were managed via the deployment pipelines. Anytime there was a need for off-GCP access, the clients are managed via the deployment pipeline. So, that means there's a full audit control and records of those keys, and who had access to them, and when and where they were used.
+This case involves Finserv, which is how people in the industry refer to financial services.  
+There are two industries where security comes up as a priority in nearly every transaction. Can you guess them?  
+Financial services is one because the transactions involved are both private and involve the exchange of value.  
+The other is the healthcare industry, where a lot of the information is what they call PII or personally identifiable information. Let's see how security is handled in this financial services example.  
+A lot of customers we see are in the enterprise space, so their needs are very similar.  
+This example comes from a financial services company. We often see similar requirements among Finserv companies.  
+So, a Finserv customer had this interesting business requirement. **Encryption in transit and at rest for all developer operations**.  
 
-Case Study 5
-Case 05: Managing Implementation
+Follow Google Best Practices. All keys must be managed by the company. They wanted to own the keys. The real trick here is that the structure and solution had to be put into production at one time.  
+It couldn't be built-in parts into production, it had to be all working when it went into production. That caused us to think about what parts were inherent and what parts we could automate.  
+So, we ended up using a **Jenkins Pipeline and Deployment Manager Templates** for parts of this automation. 
+
+We mapped that to technical requirements like this.  
+- Use Google authentication.
+- No public IP access unless through a bastion host.  
+- No Operations team access to production environment, that means **NoOps**.  
+- Everything is automated.
+- Minimize downloaded keys.
+- Keys accounted for via business logic application.  
+
+**All the Google APIs are encrypted in transit and authenticated**. So, that requirement was inherited and automatic.  
+
+The production team needed operations access but without handing them the keys. So, what we did is implemented all operations in deployment pipelines using Jenkins and Deployment Manager. The business logic was implemented using Python in the Deployment Manager Templates.  
+
+This is how we implemented that technical requirements.  
+All Google APIs are encrypted in transit and authenticated.  
+Production has Operations team access.  
+All deployment pipelines via Jenkins and Deployment Manager business logic and Python templates and Deployment Manager.  
+CloudSDK was not installed in local machines. Cloud Shell ensures that no keys are downloaded. Service Account Keys when needed for off-GCP clients are managed via deployment pipelines.  
+There are two kinds of operations actions: on-GCP actions and off-GCP actions. For on-GCP actions, we didn't install CloudSDK on local machines.  
+Instead, **we set them up to use Cloud Shell**, that ensured that no keys were downloaded. For off-GCP actions, the Service Account Keys were managed via the deployment pipelines. Anytime there was a need for off-GCP access, the clients are managed via the deployment pipeline.  
+So, that means there's a full audit control and records of those keys, and who had access to them, and when and where they were used.
+
+**Case 05: Managing Implementation**
 
 A lot of the customers we see are in the Enterprise space, so their needs are very similar. This example came from a Financial Services company. We often see similar requirements among FinServ companies.
 
-A Finserv customer had this interesting business requirement...
+A Finserv customer had this interesting business requirement...  
 
-Encryption in transit and at rest for all developer operations
-Follows Google Best Practices
-All Keys must be managed by Company - they wanted to own the keys
-The real trick here is that the structure and solution had to be put into production at one time. It couldn't be built in parts into production. It had to be all working when it went into production. That caused us to think about what parts were inherent, and what parts we could automate. So we ended up using a Jenkins pipeline and Deployment Manager templates for parts of this automation.
+Encryption in transit and at rest for all developer operations  
+Follows Google Best Practices  
+All Keys must be managed by Company - they wanted to own the keys  
+The real trick here is that the structure and solution had to be put into production at one time. It couldn't be built in parts into production. It had to be all working when it went into production. That caused us to think about what parts were inherent, and what parts we could automate. So we ended up using a Jenkins pipeline and Deployment Manager templates for parts of this automation.  
 
-We mapped that to technical requirements like this…
+We mapped that to technical requirements like this…  
 
-Use Google Authentication.
-No Public IP access unless through bastion host.
-No Operations team access to production environment. That means "no ops" - everything is automated.
-Minimize downloaded keys.
-Keys accounted for via business logic application.
-All of the Google APIs are encrypted in transit, and authenticated. So that requirement was inherited and automatic. The production team needed operations access but without handing them keys. So what we did is implemented all operations in deployment pipelines using Jenkins and Deployment Manager. The business logic was implemented using python in the Deployment Manager templates. 
+Use Google Authentication.  
+No Public IP access unless through bastion host.  
+No Operations team access to production environment.   That means "no ops" - everything is automated.  
+Minimize downloaded keys.  
+Keys accounted for via business logic application.  
+All of the Google APIs are encrypted in transit, and authenticated. So that requirement was inherited and automatic. The production team needed operations access but without handing them keys. So what we did is implemented all operations in deployment pipelines using Jenkins and Deployment Manager. The business logic was implemented using python in the Deployment Manager templates.  
 
-And this is how we implemented that technical requirement.
+And this is how we implemented that technical requirement.  
 
-All Google APIs are encrypted in transit, and authenticated.
-Production has operations team access - all deployment pipelines via Jenkins and Deployment Manager.  Business Logic in python templates in Deployment Manager.
-CloudSDK was not installed in local machines - Cloud Shell ensures no keys are downloaded.
-Service Account keys when needed for off-GCP clients are managed via deployment pipelines.
-There are two kinds of operations actions; on-GCP actions and off-GCP actions. For on-GCP actions, we didn't install Cloud SDK on local machines. Instead, we set them up to use Cloud Shell. That ensured that no keys were downloaded. For off-GCP actions,the Service Account keys were managed via the deployment pipelines. Any time there was a need for off-GCP access, the clients are managed via the deployment pipelines. So that means there is full audit, control, and records of those keys, who had access to them, and when and where they were used.
+All Google APIs are encrypted in transit, and authenticated.  
+Production has operations team access - all deployment pipelines via Jenkins and Deployment Manager.  Business Logic in python templates in Deployment Manager.  
+CloudSDK was not installed in local machines - Cloud Shell ensures no keys are downloaded.  
+Service Account keys when needed for off-GCP clients are managed via deployment pipelines.  
+There are two kinds of operations actions; on-GCP actions and off-GCP actions. For on-GCP actions, we didn't install Cloud SDK on local machines. Instead, we set them up to use Cloud Shell. That ensured that no keys were downloaded. For off-GCP actions,the Service Account keys were managed via the deployment pipelines. Any time there was a need for off-GCP access, the clients are managed via the deployment pipelines. So that means there is full audit, control, and records of those keys, who had access to them, and when and where they were used.  
 
 ## Preparing for Advising
 
 ### Advising development operation teams
 
 Most of the items in the exam outline have been covered already in another context.
-The first rule of testing is that you can't test everything so you need to make some decisions. Unit testing focuses on individual functional units, for example, exercising an API. In some development environments, it's common for the original software developer to provide a testing application that exercises the API and validates that it's working as expected. Integration testing has to do with putting parts together and testing them as an assembly. Sometimes the individual parts can pass unit test because each is working as designed, but when the units are assembled they may not be compatible. You can also discover timing issues called race conditions during integration testing. One good piece of advice is to create a launch checklist. In this example, there are dependencies, capacities, single points of failure, security and access, and a phased roll out plan. With all those items to be checked and some of them being very complex, it's easy to see the value of using an organized approach to ensuring that everything's ready. General advice about release management? Well, automate everything you can. Also, instead of creating a process with a resource bottleneck which can slow down release, consider implementing a self-service approach. Let the lead developers or the product managers perform the release using the tools. Reliability and consistency are the keys to making release work well. Also, implement access control over critical release features and processes. For example, a team lead or a tech lead might be a member of the release group, and have special access.
-When we think about capacity planning for launch, it's common to create a moon shot event where everything has to come together perfectly at a single moment for the launch to succeed. Consider instead using a phased approach, by launching first to a smaller market. The service can generate feedback and even warn of issues that might not scale in subsequent phases.
-A classic example of this was when the first Pokemon Go game was launched. It was launched first in Japan. The game was so popular that it had scaling issues because the demand was much greater than the anticipated demand for which the service was designed. Fortunately, launches in Europe, the US and other locations were separated by a few days. Staging the launch gave the team the time needed to understand the scaling issue and redesign and reimplement the service before its second launch. I'm pretty sure you know this already. There are three ways to interact with Google Cloud, first is GCP Console. Second is the tiny virtual machine that's started up inside Console called Cloud Shell. One thing that makes Cloud Shell useful is it's authorized in the project, and it has the Cloud SDK tools including gcloud, gsutil and bq installed. You can also install the Cloud SDK outside of Google Cloud on a local computer or VM.
+The first rule of testing is that you can't test everything so you need to make some decisions.  
+**Unit testing** focuses on individual functional units, for example, exercising an API. In some development environments, it's common for the original software developer to provide a testing application that exercises the API and validates that it's working as expected.  
+**Integration testing** has to do with putting parts together and testing them as an assembly. Sometimes **the individual parts can pass unit test because each is working as designed**, but when the units are assembled they may not be compatible. You can also discover timing issues called race conditions during integration testing.  
+One good piece of advice is to create a launch checklist. In this example, there are dependencies, capacities, single points of failure, security and access, and a phased roll out plan.  
+
+With all those items to be checked and some of them being very complex, it's easy to see the value of using an organized approach to ensuring that everything's ready.  
+General advice about release management? W**ell, automate everything you can**. Also, instead of creating a process with a resource bottleneck which can slow down release, **consider implementing a self-service approach**. Let the lead developers or the product managers perform the release using the tools.  
+**Reliability and consistency** are the keys to making release work well. Also, **implement access control over critical release features and processes**. For example, a team lead or a tech lead might be a member of the release group, and have special access.  
+
+When we think about capacity planning for launch, it's common to create a moon shot event where everything has to come together perfectly at a single moment for the launch to succeed.  
+Consider instead using a phased approach, by launching first to a smaller market. The service can generate feedback and even warn of issues that might not scale in subsequent phases.  
+A classic example of this was when the first Pokemon Go game was launched. It was launched first in Japan. The game was so popular that it had scaling issues because the demand was much greater than the anticipated demand for which the service was designed. Fortunately, launches in Europe, the US and other locations were separated by a few days.  
+Staging the launch gave the team the time needed to understand the scaling issue and redesign and reimplement the service before its second launch. I'm pretty sure you know this already.  
+There are three ways to interact with Google Cloud, first is GCP Console. Second is the tiny virtual machine that's started up inside Console called Cloud Shell.  
+One thing that makes Cloud Shell useful is it's authorized in the project, and it has the Cloud SDK tools including gcloud, gsutil and bq installed.  
+You can also install the Cloud SDK outside of Google Cloud on a local computer or VM.
 
 ### Practice Exam Questions 5
 
-Implement back-out/rollback for website with hundreds of VMs. Site has frequent critical updates. Create a nearline copy of static data in Cloud Storage. Create a snapshot of each VM prior to update in case of failure. Use managed instance groups with the "rolling-action start update" command when starting a rolling update. Only deploy changes using Deployment Manager templates. The correct answer is C. Use managed instance groups with the "rolling-action start update" command when starting a rolling update. Allows compute engine to handle updates, easy management of VMs. Website with hundreds of VMs, load-balanced likely already using a managed instance group. Now here's a tip. Did you know about this command? This is an example of the level of detail you should be familiar with. If you had studied managed instance groups features, you would have at least seen the "rolling-action start update" option and recognized it in the question. Nearline copy would have been unreliable because once the copy has overwritten, you can't roll it back. Creating VM snapshots could work but it's not an efficient way to backup big data. Also the bigger the data the longer the backup takes which could impact production. Using Deployment Manager templates runs the risk of version conflicts. So, managed instance group features are most efficient for this situation. A car reservation system has long-running transactions, which one of the following deployment methods should be avoided? Execute canary releases, perform AB testing prior to release, introduce a blue-green deployment model, introduce a pipeline deployment model. The answer is introduce a blue-green deployment model. Switching the load balancer from pointing at the green, good environment to the blue new environment is a fast way to roll back if there's a problem during a release. However, long-running transactions would be disrupted by that switch. This question requires you to know a little about AB testing and a little about blue-green deployments and a little about canary releases. They're covered lightly in our courses but it would be advisable to study these separately since they are not Google specific methods. The second link discusses long-running connections and how to support them.
+Implement back-out/rollback for website with hundreds of VMs. Site has frequent critical updates.  
+- Create a nearline copy of static data in Cloud Storage.  
+- Create a snapshot of each VM prior to update in case of failure.  
+- Use managed instance groups with the "rolling-action start update" command when starting a rolling update.  
+- Only deploy changes using Deployment Manager templates.  
+
+The correct answer is C.  
+Use managed instance groups with the "rolling-action start update" command when starting a rolling update. Allows compute engine to handle updates, easy management of VMs.  
+Website with hundreds of VMs, load-balanced likely already using a managed instance group. Now here's a tip. Did you know about this command? This is an example of the level of detail you should be familiar with.  
+If you had studied managed instance groups features, you would have at least seen the "rolling-action start update" option and recognized it in the question. **Nearline copy would have been unreliable** because once the copy has overwritten, you can't roll it back. Creating VM snapshots could work but it's not an efficient way to backup big data. Also the bigger the data the longer the backup takes which could impact production.  
+Using Deployment Manager templates **runs the risk of version conflicts**. So, managed instance group features are most efficient for this situation.  
+
+A car reservation system has long-running transactions, which one of the following deployment methods should be avoided?  
+- Execute canary releases,  
+- perform AB testing prior to release,  
+- introduce a blue-green deployment model,  
+- introduce a pipeline deployment model.  
+
+The answer is introduce a blue-green deployment model.  
+Switching the load balancer from pointing at the green, good environment to the blue new environment is a fast way to roll back if there's a problem during a release.  
+However, long-running transactions would be disrupted by that switch. This question requires you to know a little about AB testing and a little about blue-green deployments and a little about canary releases.  
+They're covered lightly in our courses but it would be advisable to study these separately since they are not Google specific methods. The second link discusses long-running connections and how to support them.
 
 ## Preparing for Reliability
 
 ### Ensuring solution and operations reliability
 
-Ensuring solution and operations reliability. How do you ensure that a solution is reliable? Part of it occurs in the design. Making sure that common changes like increased traffic are handled in elastic ways. However, part of it is also in planning to monitor the service and to notice and respond to unplanned events. Some of those activities require human intelligence. For this reason, operations reliability spans both the technical and the procedural domains. Site reliability or SRE, is Google's approach to DevOps. It's a very comprehensive system that involves changing the culture about how maintenance occurs. One central idea is the division of aspects of operations into separate layers for clarity. Here's a tip, you ought to know something about each of these layers and most importantly, you should be able to distinguish between the layers. For example, monitoring is not incident response. They're related. Do you know what features relates them? It's alerts. A Stackdriver alert is triggered by monitoring and begins incident response, which is composed mainly of procedures. Qualities are often where our goals start, but figuring out how to measure them quantitatively enables data-driven operations. It can be difficult to figure out exactly what to measure because sometimes what's easily measured is not a good indicator of customer interests. Speaking of alerts, at Google, we have the concept of alerting for the right reason. Often, alerts are designed to signify some metric passing some limit. But the question is whether that metric or trigger is something the customer cares about or not. We need to alert on some technical measures. But if there's something that is directly causing the customer frustration and upset, that should also be an alert or perhaps replace a more technical alert. Make sure you know the difference between blackbox monitoring and whitebox monitoring. Blackbox monitoring and whitebox monitoring are frequently misunderstood. In the cloud architect contexts, the difference has to do with the assumptions you can make when designing your monitoring framework. In blackbox monitoring, you're not supposed to know or think about the inner workings of the application. All you can see is the user interface or the API interface. So, the only assumptions you're allowed to make have to do with these interactions. Blackbox monitoring is very good for validating user experience. You end up monitoring things like latency between request and response. In whitebox monitoring, the application is assumed to be known to you. The inner workings of the application are transparent. So, you can use that special knowledge when defining the test. A good example would be if you knew that under certain conditions a critical resource will get oversubscribed and you've designed the system from resiliency. In this case, you might flood the interface to trigger the state as if the service was under attack to see if the resiliency worked as expected. That's whitebox monitoring, where the tests can be focused on inner workings and not just the UI. In practice of course, you need both kinds. Here's an example, CPU utilization may or may not indicate user satisfaction. Round-trip delay or frequency of request errors might be a better measure of the user's experience. What metrics are you using? Can you define metrics that relate directly to user experience and service objectives? What are the watermarks or alert levels at which human processes are engaged? How are you setting those values? When do they need to be revisited and updated? How do you know they're related to important events? Know how to use trace and debug. Examples of other tools that Stackdriver replaces. Note that it's not just a collection of alternate tools that's the issue, but how you use them together. The individual tools are not integrated or designed to work together. So, a lot of manual procedures and translation massaging of data are required to use them together. With Stackdriver, the integration is by design. So, that work disappears. Stackdriver is also multi-cloud, able to manage projects across GCP and AWS. Another useful idea is that people don't plan to fail, they fail to plan. Another way of saying this is, the only time we have to prepare for emergencies is before they happen. Once the emergency is occurring, it's too late to prepare. You can design a great technical solution, but if it doesn't include human processes, then it might not be adaptive and resilient. Easy buttons are tools and processes that automate common actions. A playbook is a list of what to do when. So, here's a general rule; for every alert you should have a play in the playbook. What are the differences between a dashboard, an alert, and incident response? A dashboard is a display for monitoring a system. It's commonly tailored to the application. An alert occurs when a condition is met such as a metric crossing above a particular value for a given duration. The alert is the notification and alert could just be a warning or it could be a notification of an incident that needs to be handled immediately. Incident response consists of the steps you would take when a problem occurs. This might be written up in a playbook. Find a lab such as Quick Labs lab that uses logging and trace and debug to identify and solve an application problem. This will give you a sense of the value and how these components work together. There's a lab like this in the architect in GCP infrastructure class. Google's approach focuses on transparency, on involving the customer in the solution and blamelessness. Assigning blame establishes root cause with a person or an organization instead of getting to the real technical or procedural issue so that it can be fixed. If blame has been assigned, there's a high likelihood that the process has been prematurely suspended without really addressing the problem. What are the people supposed to do? What decisions or actions are they supposed to make or take? Are these documented? As mentioned, the metrics are not sufficient without the meeting to review the metrics, to evaluate them and make decisions and take actions. In those cases where timing is critical, you'll want to playbook and easy buttons supporting automation to increase the speed and consistency of incident response. Here's another tip, when something goes wrong with the cloud resource, give yourself or your team a limited period of time to solve it. For example, if a VM starts behaving incorrectly, see if it's something that's easily fixed. Then spare the VM to the side and replace it. Perform your diagnostics and debugging after the instance is replaced.
+Ensuring solution and operations reliability. How do you ensure that a solution is reliable? Part of it occurs in the design.  
+Making sure that common changes like increased traffic are handled in elastic ways. However, part of it is also in planning to monitor the service and to notice and respond to unplanned events.  
+Some of those activities require human intelligence. For this reason, operations reliability spans both the technical and the procedural domains.  
+Site reliability or SRE, is Google's approach to DevOps. It's a very comprehensive system that involves changing the culture about how maintenance occurs.  
+
+SRE Layers Pyramid
+
+- - - - - - - Product
+- - - - - - Development
+- - - - - Capacity Planning
+- - - - Testing and Release Procedures
+- - - Post mortem/Root Cause Analysis
+- - Incident Response
+- Monitoring
+
+One central idea is the **division of aspects of operations into separate layers** for clarity. Here's a tip, you ought to know something about each of these layers and most importantly, you should be able to distinguish between the layers.  
+For example, monitoring is not incident response. They're related. Do you know what features relates them? It's **alerts**.  
+A Stackdriver alert is triggered by monitoring and begins incident response, which is composed mainly of procedures.  
+Qualities are often where our goals start, but figuring out how to measure them quantitatively enables data-driven operations.  
+
+It can be difficult to figure out exactly what to measure because **sometimes what's easily measured is not a good indicator** of customer interests. Speaking of alerts, at Google, we have the concept of **alerting for the right reason**.  
+Often, alerts are designed to signify some metric passing some limit. But the question is whether that metric or trigger is something the customer cares about or not.  
+We need to alert on some technical measures. But if there's something that is directly causing the customer frustration and upset, that should also be an alert or perhaps replace a more technical alert.  
+Make sure you know the **difference between blackbox monitoring and whitebox monitoring**.  
+Blackbox monitoring and whitebox monitoring are frequently misunderstood. In the cloud architect contexts, the difference has to do with the assumptions you can make when designing your monitoring framework.  
+**In blackbox monitoring**, you're not supposed to know or think about the inner workings of the application. All you can see is the user interface or the API interface. So, the only assumptions you're allowed to make have to do with these interactions.  
+Blackbox monitoring is very good for validating user experience. You end up monitoring things like latency between request and response.  
+**In whitebox monitoring**, the application is assumed to be known to you. The inner workings of the application are transparent. So, you can use that special knowledge when defining the test. A good example would be if you knew that under certain conditions a critical resource will get oversubscribed and you've designed the system from resiliency. In this case, you might flood the interface to trigger the state as if the service was under attack to see if the resiliency worked as expected. That's whitebox monitoring, where the tests can be focused on inner workings and not just the UI.  
+
+In practice of course, you need both kinds. Here's an example, CPU utilization may or may not indicate user satisfaction.  
+Round-trip delay or frequency of request errors might be a better measure of the user's experience. What metrics are you using?  
+Can you define metrics that relate directly to user experience and service objectives? What are the watermarks or alert levels at which human processes are engaged? How are you setting those values? When do they need to be revisited and updated? How do you know they're related to important events?  
+Know how to use trace and debug.  
+Examples of other tools that Stackdriver replaces. Note that it's not just a collection of alternate tools that's the issue, but how you use them together. The individual tools are not integrated or designed to work together. So, a lot of manual procedures and translation messaging of data are required to use them together.  
+With Stackdriver, the integration is by design. So, that work disappears.  
+Stackdriver is also multi-cloud, able to manage projects across GCP and AWS. Another useful idea is that people don't **plan to fail, they fail to plan**. Another way of saying this is, the only time we have to prepare for emergencies is before they happen.  
+**Once the emergency is occurring, it's too late to prepare**. You can design a great technical solution, but if it doesn't include human processes, then it might not be adaptive and resilient.  
+Easy buttons are tools and processes that automate common actions. A playbook is a list of what to do when.  
+
+So, here's a general rule; **for every alert you should have a play in the playbook**. What are the differences between a dashboard, an alert, and incident response?  
+A **dashboard** is a display for monitoring a system. It's commonly tailored to the application.  
+An **alert** occurs when a condition is met such as a metric crossing above a particular value for a given duration. The alert is the notification and alert could just be a warning or it could be a notification of an incident that needs to be handled immediately.  
+**Incident response** consists of the steps you would take when a problem occurs. This might be written up in a playbook.  
+Find a lab such as Quick Labs lab that uses logging and trace and debug to identify and solve an application problem. This will give you a sense of the value and how these components work together.  
+There's a lab like this in the architect in GCP infrastructure class. Google's approach focuses on transparency, on involving the customer in the solution and blamelessness.  
+
+Strategies for dealing with failure:
+- **Obviation** - design a system in which a particular type of failure is impossible
+- **Prevention** - take steps to ensure that a possible failure does not occur
+- **Detection**/**Mitigation** - detect a failure before or as it is happening and take steps to reduce or eliminate the effects of it
+- **Graceful Degradation** - instead of failing completely, handle stress and return to full service when the issue passes
+- **Repair** - fix the problem, hopefully it will not come back, at least not in the same way
+- **Recover** - allow the problem to occur and get services back as soon as possible, measure indicators of recovery and work to improve them
+
+`"Hope is not a strategy"`
+
+Assigning blame establishes root cause with a person or an organization instead of getting to the real technical or procedural issue so that it can be fixed. If blame has been assigned, there's a high likelihood that the process has been prematurely suspended without really addressing the problem.  
+What are the people supposed to do? What decisions or actions are they supposed to make or take? Are these documented?  
+As mentioned, the metrics are not sufficient without the meeting to review the metrics, to evaluate them and make decisions and take actions. In those cases where timing is critical, you'll want to playbook and easy buttons supporting automation to increase the speed and consistency of incident response.  
+Here's another tip, **when something goes wrong with the cloud resource, give yourself or your team a limited period of time to solve it**. For example, if a VM starts behaving incorrectly, see if it's something that's easily fixed. Then spare the VM to the side and replace it. Perform your diagnostics and debugging after the instance is replaced.
 
 ### Case Study 6
 
-A customer had this interesting business requirement. The back office system needs to support frequent updates. The back office system needs to be available especially between 6:00 AM and 06:00 PM. A failure in one part of the back office system shouldn't bring down the entire system, and the customer wants to re-architect the system. They don't want to bring down the entire system when doing an update. So, we map that to technical requirements like this. Microservices, break apart the back office system into independent services, create a standard way for teams to publish logs and metrics for their services, and create a standard way for services to be rolled out. This use case was a natural fit for microservices. They knew that when they told development groups that they would be developing their own microservices, that they needed standards for reliability and scalability, and that they want common ways to monitor the applications. This is how we implemented that technical requirement. Google Kubernetes Engine, microservices deployed into a shared cluster. Surging rolling deployments with Kubernetes deployment resource, and Stackdriver, custom metrics, a wrapper library around Stackdriver client libraries and that enabled us to expose common metrics, and expose custom metrics. So, the solution was to use Stackdriver exposing the metrics that could be done through dashboards, exposed metrics through Prometheus standards scraped from API's and sent to Stackdriver, where it could be exposed through the dashboards. They use custom metrics and Stackdriver, so they were able to monitor and scale their microservices based on those metrics.
+A customer had this interesting business requirement. The back office system needs to support frequent updates. The back office system needs to be available especially between 6:00 AM and 06:00 PM.  
+A failure in one part of the back office system shouldn't bring down the entire system, and the customer wants to re-architect the system.  
+They don't want to bring down the entire system when doing an update.  
+So, we map that to technical requirements like this.  
+- Microservices,  
+- break apart the back office system into independent services,
+- create a standard way for teams to publish logs and metrics for their services,
+- create a standard way for services to be rolled out.  
 
-Case Study 6
-Case: 06 Solution and Operations Reliability
+This use case was a **natural fit for microservices**.  
+
+They knew that when they told development groups that they would be developing their own microservices, that they **needed standards for reliability and scalability**, and that they want **common ways to monitor** the applications. This is how we implemented that technical requirement.  
+
+**Google Kubernetes Engine**, microservices deployed into a shared cluster.  
+Surging rolling deployments with Kubernetes deployment resource.  
+
+**Stackdriver**, custom metrics, a wrapper library around Stackdriver client libraries and that enabled us to expose common metrics, and expose custom metrics.  
+
+So, the solution was to use Stackdriver exposing the metrics that could be done through dashboards, exposed metrics through Prometheus standards scraped from API's and sent to Stackdriver, where it could be exposed through the dashboards. They use custom metrics and Stackdriver, so they were able to monitor and scale their microservices based on those metrics.
+
+**Case: 06 Solution and Operations Reliability**
 
 A customer had this interesting business requirement...
 
-The back-office system needs to support frequent updates
-The back-office system needs to be available - especially between 06:00 CEST and 18:00 CEST
-A failure in one part of the back-office system shouldn’t bring down the entire system
-Customer wants to re-architect system. Does not want to bring down the entire system when doing an update.
+- The back-office system needs to support frequent updates  
+- The back-office system needs to be available - especially between 06:00 CEST and 18:00 CEST  
+- A failure in one part of the back-office system shouldn’t bring down the entire system  
+- Customer wants to re-architect system. Does not want to bring down the entire system when doing an update.  
 We mapped that to technical requirements like this…
 
-Microservices!
+**Microservices!**
 
-Break apart the back-office system into independent services
-Create a standard way for teams to publish logs and metrics for their services
-Create a standard way for services to be rolled out
-This was a natural fit for microservices. They knew that when they told development groups that they would be developing their own microservices, that they needed standards for reliability and scalability, and they want common ways to monitor the applications.
+- Break apart the back-office system into independent services  
+- Create a standard way for teams to publish logs and metrics for their services  
+- Create a standard way for services to be rolled out  
+
+This was a natural fit for microservices. They knew that when they told development groups that they would be developing their own microservices, that they needed standards for reliability and scalability, and they want common ways to monitor the applications.  
 
 And this is how we implemented that technical requirement.
 
-Google Kubernetes Engine
+**Google Kubernetes Engine**
 
-Microservices deployed into a shared cluster
-Surging Rolling Deployments with K8s deployment resource
-Stackdriver
+Microservices deployed into a shared cluster  
+Surging Rolling Deployments with K8s deployment resource  
 
-Custom Metrics - a wrapper library around the Stackdriver client libraries to: 
-Expose “common” metrics
-Expose custom metrics
-Solution was to use Stackdriver. Exposing the metrics could be done through dashboards. Exposed metrics through prometheus standard, scraped from APIs, and sent to Stackdriver where it could be exposed through dashboards. 
+**Stackdriver**  
+
+- Custom Metrics - a wrapper library around the Stackdriver client libraries to:  
+  - Expose “common” metrics  
+  - Expose custom metrics  
+
+Solution was to use Stackdriver. Exposing the metrics could be done through dashboards. Exposed metrics through prometheus standard, scraped from APIs, and sent to Stackdriver where it could be exposed through dashboards.  
 
 They used custom metrics in Stackdriver, so they were able to monitor and scale their microservices based on those metrics.
 
 ### Practice Exam Questions 6
 
- microservice has intermittent problems that bursts logs. How can you trap it for live debugging?
-Log into machine with microservice and wait for the log messages. Look for error in Stackdriver Error Reporting dashboard. Configure microservice to send traces to Stackdriver Trace. Set a log metric in Stackdriver logging, alert on it past a threshold. D is the correct answer. Set a log metric in Stackdriver logging, and alert on it past a threshold. A Stackdriver metric can identify a burst of log lines. You can set an alert, then connect to the machine while the problem is happening. What's your tip from this? You should be familiar with basic Stackdriver features and operations. With distributed and scalable services, you need to debug from logs and centralized monitoring services. Error reporting is an instance whereas the a log is a history so you can see issues in context of time. Likewise, trace is a sampling system, so it might miss intermittent issues like this. Again, the tip here is to understand the differences and appropriate uses for the tools in Stack Driver. Last week a region had a 1% failure rate in web tier VMs. How should you respond?
-Monitor the application for a 5% failure rate. Duplicate the application on prem to compensate for failures in the cloud.
-Perform a root cause analysis, reviewing cloud provider and deployment details to prevent similar future failures. Halt all development until the application issue can be found and fixed. C is the correct answer.
+A microservice has intermittent problems that bursts logs. How can you trap it for live debugging?  
+- Log into machine with microservice and wait for the log messages.  
+- Look for error in Stackdriver Error Reporting dashboard.  
+- Configure microservice to send traces to Stackdriver Trace.  
+- Set a log metric in Stackdriver logging, alert on it past a threshold.  
+
+D is the correct answer.  
+Set a log metric in Stackdriver logging, and alert on it past a threshold. A Stackdriver metric can identify a burst of log lines. You can set an alert, then connect to the machine while the problem is happening.  
+What's your tip from this? You should be familiar with basic Stackdriver features and operations. With distributed and scalable services, you need to debug from logs and centralized monitoring services. Error reporting is an instance whereas the a log is a history so you can see issues in context of time. Likewise, trace is a sampling system, so it might miss intermittent issues like this. Again, the tip here is to understand the differences and appropriate uses for the tools in Stackdriver.  
+
+Last week a region had a 1% failure rate in web tier VMs. How should you respond?  
+- Monitor the application for a 5% failure rate.  
+- Duplicate the application on prem to compensate for failures in the cloud.  
+- Perform a root cause analysis, reviewing cloud provider and deployment details to prevent similar future failures.  
+- Halt all development until the application issue can be found and fixed.  
+
+C is the correct answer.
 
 ## Challenge Lab
 
 This is not a technical training course
-Don't expect to be taught the touchstone concepts here. The purpose of them in this course is to help you evaluate your preparedness. Seek training in the technical training courses, documentation, labs, and so forth.
+Don't expect to be taught the touchstone concepts here. The purpose of them in this course is to help you evaluate your preparedness. Seek training in the technical training courses, documentation, labs, and so forth.  
 
-Practice the case evaluation method on cases and on sample questions
-Business Requirements
-Technical Requirements
-Technical Watchpoints (requirements or facts that indicate elements of a solution)
-Proposed Solution
-This is not just a test-taking skill. This is a skill used in practice by consultants on the job. It is how they think about their customer engagements and talk about it with other professionals.
+Practice the case evaluation method on cases and on sample questions  
+- Business Requirements  
+- Technical Requirements  
+- Technical Watchpoints (requirements or facts that indicate elements of a solution)  
+- Proposed Solution  
 
-What questions would you want to ask a client?
-You can make reasonable assumptions about a case. But if you seem to be missing information, especially technical information, that may be useful. It may help constrain the degree of freedom and limit the number of potentially correct answers. It might indicate that an answer is incorrect. In other words, use what you don't know or what is missing in the case to help you evaluate the intent of the question. 
+This is not just a test-taking skill. This is a skill used in practice by consultants on the job. It is how they think about their customer engagements and talk about it with other professionals.  
 
-Make sure you know what is being asked.
-If you find yourself speculating and trying to add information to the case beyond reasonable assumptions, then you might be drifting off of the intent of the question. 
+What questions would you want to ask a client?  
+You can make reasonable assumptions about a case. But if you seem to be missing information, especially technical information, that may be useful. It may help constrain the degree of freedom and limit the number of potentially correct answers. It might indicate that an answer is incorrect. In other words, use what you don't know or what is missing in the case to help you evaluate the intent of the question.  
 
-Hands-on
-It is a good idea to review and run through basic labs so that the hands-on details are fresh in mind. You might want to review steps of labs you performed before. Or you might want to do some of them again.
+Make sure you know what is being asked.  
+If you find yourself speculating and trying to add information to the case beyond reasonable assumptions, then you might be drifting off of the intent of the question.  
+
+Hands-on  
+It is a good idea to review and run through basic labs so that the hands-on details are fresh in mind. You might want to review steps of labs you performed before. Or you might want to do some of them again.  
 
 ## Resources and next steps
 
-In this module, we'll discuss next steps. This course exposed you to a lot of information. There were many elements designed to help you approach preparing for the exam in different ways. First, we described the certification and the exam itself. You were encouraged to adopt an iterative strategy of answering the questions you're most confident about first, and bookmarking the others and revisiting them. You also learn that the exam is designed to test practitioners who do the job. It isn't about only knowing certain information or details, it's about being able to reason through cases and make reasoned decisions. The majority of this course followed the exam guide outline, and we explored each of the parts of the exam, the concepts behind them, and map these two important information to know about the technology that's taught in the architecting infrastructure courses. Every section of the exam guide was summarized with the blue table that identify the outline subjects and gave you helpful tips to consider. This wasn't a cram session. We're not trying to cover every detail or to build your knowledge from the ground up. In fact, the goal was to remind you of higher-level important concepts that you ought to know and understand, knowledge you probably gained from attending other courses or from your experience. The idea is, if you understand these touchstone concepts, you'll also need to know all the dependent basic information that they depend on and the reasoning behind them. You can still use a bottom-up mastery approach to help prepare for the exam if you like, the two approaches are not mutually exclusive. You got to practice answering sample exam questions, and we shared some actual case studies with you that were from real cloud architects explaining how they use the skills on the job. You now have a pretty good sense of the exam and how to prepare for it. You've been exposed to information that will help you decide what to study and how to prepare. Next, you'll be given an opportunity to practice answering sample exam questions and finally, a list of resources for further study and preparation.
+In this module, we'll discuss next steps. This course exposed you to a lot of information. There were many elements designed to help you approach preparing for the exam in different ways.  
+First, we described the certification and the exam itself. You were encouraged to adopt an iterative strategy of answering the questions you're most confident about first, and bookmarking the others and revisiting them.  
+You also learn that the exam is designed to test practitioners who do the job. It isn't about only knowing certain information or details, it's about being able to reason through cases and make reasoned decisions. The majority of this course followed the exam guide outline, and we explored each of the parts of the exam, the concepts behind them, and map these two important information to know about the technology that's taught in the architecting infrastructure courses.  
+
+Every section of the exam guide was summarized with the blue table that identify the outline subjects and gave you helpful tips to consider. This wasn't a cram session.  
+We're not trying to cover every detail or to build your knowledge from the ground up. In fact, the goal was to remind you of higher-level important concepts that you ought to know and understand, knowledge you probably gained from attending other courses or from your experience.  
+The idea is, if you understand these touchstone concepts, you'll also need to know all the dependent basic information that they depend on and the reasoning behind them. You can still use a bottom-up mastery approach to help prepare for the exam if you like, the two approaches are not mutually exclusive.  
+You got to practice answering sample exam questions, and we shared some actual case studies with you that were from real cloud architects explaining how they use the skills on the job.  
+You now have a pretty good sense of the exam and how to prepare for it. You've been exposed to information that will help you decide what to study and how to prepare. Next, you'll be given an opportunity to practice answering sample exam questions and finally, a list of resources for further study and preparation.
 
 Review of tips
 TIP 1: Create your own custom preparation plan using the resources in this course.
